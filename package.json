@@ -1,0 +1,23 @@
+{
+  "name": "davilari",
+  "version": "1.0.0",
+  "description": "Davilari's website",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/alexxmde/davilari.git"
+  },
+  "author": "Alex Alonso <alex.xmde@gmail.com>",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/alexxmde/davilari/issues"
+  },
+  "homepage": "https://github.com/alexxmde/davilari#readme",
+  "dependencies": {
+    "ejs": "^2.4.2",
+    "express": "^4.14.0"
+  }
+}
