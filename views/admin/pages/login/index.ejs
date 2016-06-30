@@ -1,0 +1,36 @@
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <title>Davilari Admin </title>
+    <link rel="stylesheet" href="/resources/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/css/admin.css">
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+
+        <div class="login-box">
+          <header class="col-xs-12 text-center">
+            <img src="/resources/img/logo.jpg"/ class="img img-responsive login-logo">
+          </header>
+          <article class="col-xs-12  login-fields">
+            <form action="/admin/login" method="POST">
+              <fieldset class="form-group">
+                <input class="form-control" type="text" name="username" id="username" placeholder="Usuario"/>
+
+              </fieldset>
+              <fieldset class="form-group">
+                <input class="form-control" type="password" name="password" id="password" placeholder="Senha" />
+              </fieldset>
+
+              <p class="error" id="error"></p>
+
+              <input class="form-control" type="submit" value="Login" />
+
+            </form>
+          </article>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

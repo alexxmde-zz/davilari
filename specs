@@ -1,0 +1,36 @@
+Public
+  FrontEnd
+    Layout Paginas
+      Layout - 6 hrs
+      Home - 10 hrs
+      Produtos - 6 hrs
+      Ambientes - 6 hrs
+      Localizacao - 8 hrs
+      Acabamentos - 8 hrs
+      
+  BackEnd
+    Produtos - 8 hrs
+    Ambientes - 8 hrs
+    Acabamentos - 8 hrs
+    
+
+Admin
+  FrontEnd
+    Layout
+     Login - 2 hrs
+      Layout - 3 hrs
+      Produtos - 4 hrs
+      Ambientes - 4 hrs
+      Acabamentos - 4 hrs
+    JS
+      Login - 1 hr
+      Produtos - 8 hrs
+      Ambientes - 8 hrs
+      Acabamentos - 8 hrs
+    
+
+  BackEnd
+  Login - 10 hrs
+  Produtos - 8 hrs
+  Ambientes - 8 hrs
+  Acabamentos - 8 hrs

@@ -1,16 +1,30 @@
-var express = require('express');
+var express = require('express'),
+    bodyParser = require('body-parser'),
+    cookieParser = require('cookie-parser'),
+    session = require('express-session'),
+    adminRouter = require('./routes/admin');
 
-var app = express();
-var ip = '127.0.0.1';
-var port = '8080';
+
+app = express(),
+ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
+port = process.env.OPENSHIFT_NODEJS_PORT || '3000';
+
+
+
+app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.json());
+
+app.use(cookieParser());
+app.use(session({secret: 'donniebrasco'}));
 
 app.set('view engine', 'ejs');
-
 app.use('/resources', express.static('resources'));
+app.use('/admin', adminRouter);
 
-app.get('/', function (req, res) {
-  res.render('pages/index');
-});
+
+
+
+
 
 app.listen(port, ip, function(err) {
   if (err) {

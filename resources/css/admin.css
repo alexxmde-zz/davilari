@@ -1,0 +1,20 @@
+@charset="UTF-8";
+
+.login-box {
+  width:300px;
+  height:300px;
+  margin:25% auto;
+
+}
+
+.login-fields {
+  margin-top:20px;
+}
+
+#password {
+}
+
+
+.error {
+  color:red;
+}
