@@ -1,1 +1,39 @@
-<h1>Products</h1>
+<% include ../../templates/header %>
+<div class="container">
+  <div class="row">
+    <header class="product-header">
+      <h1>Produtos</h1>
+    </header>
+
+    <article>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Descricao</th>
+            <th>Preco</th>
+            <th>Acoes</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% products.forEach(function(prod) { %>
+          <tr>
+            <td> <%= prod.name %> </td>
+            <td> <%= prod.description %> </td>
+            <td> <%= prod.price %> </td>
+            <td>
+              <a href="/admin/produto/<%= prod._id %>">
+                <button class="btn btn-default">
+                  <span class="glyphicon glyphicon-edit"></span>
+                </button>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </article>
+
+    <footer>
+      <a href="/admin/produtos/novo"><button class="btn btn-default">Novo</button>
+    </footer>
+  </div>
+</div>

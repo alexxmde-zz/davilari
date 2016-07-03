@@ -1,5 +1,6 @@
 @charset="UTF-8";
 
+
 .login-box {
   width:300px;
   height:300px;
@@ -18,3 +19,32 @@
 .error {
   color:red;
 }
+
+.form-product-image {
+  width:40%;
+}
+
+.form-images > li {
+  display:inline;
+  margin-top:10px;
+  margin-left:10px;
+}
+
+.form-images {
+  background-color:#c3c3c3;
+}
+
+
+.img-modal{
+  width:100%;
+}
+
+.delete-button {
+  margin-top:30px;
+  width:100%;
+}
+
+.modal-header {
+  background-color:white;
+}
+

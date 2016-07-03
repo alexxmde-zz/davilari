@@ -8,13 +8,12 @@
   <body>
     <div class="container">
       <div class="row">
-
         <div class="login-box">
           <header class="col-xs-12 text-center">
             <img src="/resources/img/logo.jpg"/ class="img img-responsive login-logo">
           </header>
           <article class="col-xs-12  login-fields">
-            <form action="/admin/login" method="POST">
+            <form action="/admin/login" id="login-form" method="POST">
               <fieldset class="form-group">
                 <input class="form-control" type="text" name="username" id="username" placeholder="Usuario"/>
 
@@ -25,12 +24,15 @@
 
               <p class="error" id="error"></p>
 
-              <input class="form-control" type="submit" value="Login" />
+              <button class="form-control" id="login-button">Login</button>
+
 
             </form>
           </article>
         </div>
       </div>
     </div>
+    <script type="text/javascript" src="/resources/vendor/jquery/jquery-2.2.4.min.js"></script>
+    <script type="text/javascript" src="/resources/js/login.js"></script>
   </body>
 </html>

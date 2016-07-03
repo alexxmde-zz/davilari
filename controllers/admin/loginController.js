@@ -1,11 +1,9 @@
 var userSchema = require('../../models/data/schema').User;
-console.log(userSchema);
 
 function loginController () {
   this.get = function (req, res) {
     
     if(req.session.isLogged) {
-      console.log("Is logged " + req.session.isLogged);
       res.render("admin/pages/product");
     } else {
     res.render("admin/pages/login");
@@ -23,15 +21,21 @@ function loginController () {
 
       if (user) {
         req.session.isLogged = true;
-        res.render("admin/pages/product");
+        res.status(200).send("OK");
 
       } else {
         
-        res.send("Usuario nao encontrado :" + user);
+        res.status(400).send("Usuario nao encontrado :" + user);
       }
     });
+  };
+
+  this.logout = function (req, res) {
+    req.session.isLogged = false;
   };
   }
 
 
-module.exports = new loginController();
+
+
+  module.exports = new loginController();

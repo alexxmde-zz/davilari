@@ -1,0 +1,55 @@
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8">
+    <title>Davilari Admin </title>
+    <link rel="stylesheet" href="/resources/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/resources/css/admin.css">
+
+    <script src="/resources/vendor/react/react.min.js"></script>
+    <script src="/resources/vendor/react/react-dom.min.js"></script>
+    <script src="/resources/vendor/babel/browser.min.js"></script>
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+
+        <div id="render-here"></div>
+      </div>
+    </div>
+
+    <script type="text/babel" >
+var LoginBox = React.createClass({
+  render : function () {
+    return (
+<div className="login-box">
+          <header className="col-xs-12 text-center">
+            <img src="/resources/img/logo.jpg" className="img img-responsive login-logo"/>
+          </header>
+          <article className="col-xs-12  login-fields">
+              <fieldset className="form-group">
+                <input className="form-control" type="text" name="username" id="username" placeholder="Usuario"/>
+
+              </fieldset>
+              <fieldset className="form-group">
+                <input className="form-control" type="password" name="password" id="password" placeholder="Senha" />
+              </fieldset>
+
+              <p className="error" id="error"></p>
+
+              <button className="form-control" type="submit"  >Login </button>
+
+          </article>
+        </div>
+    );
+
+  }
+});
+
+
+ReactDOM.render(<LoginBox />,
+  document.getElementById("render-here")
+);
+
+    </script>
+  </body>
+</html>

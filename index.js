@@ -11,7 +11,7 @@ port = process.env.OPENSHIFT_NODEJS_PORT || '3000';
 
 
 
-app.use(bodyParser.urlencoded({extended: false}));
+app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
 
 app.use(cookieParser());
@@ -19,9 +19,12 @@ app.use(session({secret: 'donniebrasco'}));
 
 app.set('view engine', 'ejs');
 app.use('/resources', express.static('resources'));
+//app.use('/admin', express.static('client/admin'));
 app.use('/admin', adminRouter);
 
-
+app.get('/suamae', function(req, res) {
+  res.send("SUA MAE");
+});
 
 
 
@@ -34,3 +37,5 @@ app.listen(port, ip, function(err) {
 
   console.log("Server started at: " + ip + " , port: " + port);
 });
+
+

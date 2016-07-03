@@ -20,12 +20,17 @@ connection.connect(function (err, mongoose) {
   }));
 
   this.Category = mongoose.model("Category", mongoose.Schema({
-    'name' : RUS
+    'name' : RUS,
+    'description' : String
   }));
 
   this.Product = mongoose.model("Product", mongoose.Schema({
     'name' : RUS,
-    'category' : {type: mongoose.Schema.Types.ObjectId, ref: 'Category'}
+    'category' : {type: mongoose.Schema.Types.ObjectId, ref: 'Category'},
+    'price' : Number,
+    'images' : Array,
+    'mainImage' : String,
+    'description' : String
 
   }));
   }
