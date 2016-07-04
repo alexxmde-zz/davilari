@@ -20,6 +20,7 @@ router.get('/produtos', productController.get);
 router.get('/produtos/novo', productController.getAdd);
 router.get('/produto/:id', productController.getOne);
 router.post('/produtos/novo', cpUpload, productController.post);
+router.put('/produto/:id', cpUpload, productController.put);
 
 
 module.exports = router;

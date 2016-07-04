@@ -1,4 +1,5 @@
 <% include   ../../templates/header.ejs %>
+<input type="hidden" value="<%= product._id %>" id="_id"/>
 <div class="container">
   <div class="row">
     <h1><%= product.name || "Novo Produto"%></h1>
@@ -29,9 +30,9 @@
               <% product.images.map(function(img) { %>
               <li> 
                 <img
-                                      data-image="<%= img %>"
-                                      data-toggle="modal"
-                                      data-target="#imageModal"
+                data-image="<%= img %>"
+                data-toggle="modal"
+                data-target="#imageModal"
                 class="form-product-image" data-name="<%= img %>"  src="/resources/img/products/<%= img %>"/>
               </li>
               <%}); %>
@@ -39,7 +40,7 @@
           </div>
 
         </fieldset>
-        
+
         <% } %>
 
         <fieldset class="form-group">
@@ -56,9 +57,6 @@
         <fieldset class="form-group">
           <button class="form-control btn btn-default">Salvar</button>
         </fieldset>
-
-
-
       </form>
 
     </div>
@@ -70,13 +68,15 @@
     <div class="modal-header">
       <button type="button" class="close" data-dismiss="modal">
         <span>&times</span></button>
+    </div>
+    <div class="modal-body">
       <div class="row">
         <div class="col-xs-12">
           <img src="" class="img-modal"/>
         </div>
       </div>
 
-      <button type="button" class="btn btn-danger delete-button">Excluir</button>
+      <button data-dismiss="modal" type="button" class="btn btn-danger delete-button">Excluir</button>
     </div>
   </div>
 </div>
