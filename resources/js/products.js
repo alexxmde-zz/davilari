@@ -2,6 +2,46 @@ $(document).ready(function () {
   $('form').on('submit', function (e) {
     e.preventDefault();
 
+    var validateProduct = function (data) {
+
+      var isValid = true;
+      var isUpdate = false;
+
+      if ($("#_id"))
+        isUpdate = true;
+
+      if (!data.get('name')) {
+        $("#name-validation").text("Campo obrigatorio!");
+        isValid = false;
+      }
+
+      if (!data.get('description')) {
+        $("#description-validation").text("Campo obrigatorio!");
+        isValid = false;
+      }
+
+      if (!data.get('price')) {
+        $("#price-validation").text("Campo obrigatorio!");
+        isValid = false;
+      }
+
+      if (!data.get('mainImage')) {
+        if (!isUpdate) {
+          $("#mainImage-validation").text("Campo obrigatorio!");
+          isValid = false;
+        }
+      }
+
+      if (!data.get('images')) {
+        if (!isUpdate) {
+          $("#images-validation").text("Campo obrigatorio!");
+          isValid = false;
+        }
+      }
+
+      return isValid;
+    };
+
     var url = "/admin/produtos/novo";
     var method = "POST";
     var data = new FormData($('form')[0]);
@@ -14,26 +54,33 @@ $(document).ready(function () {
 
       var oldImages = [];
       $('.form-product-image').each(function (index) {
-         oldImages.push($(this).data("image"));
+        oldImages.push($(this).data("image"));
       });
 
       data.append("old_images", JSON.stringify(oldImages));
+
     }
 
-    $.ajax({
-      url: url,
-      type: method,
-      data: data,
-      processData: false,
-      contentType: false
-    }).success(function(){
-      window.location.href = loc;
-    })
-    .fail(function (data) {
-      alert(data);
-      $('#error').html("Erro : " + data);
-    });
-  ;
+
+    if (validateProduct(data)) {
+
+      $.ajax({
+        url: url,
+        type: method,
+        data: data,
+        processData: false,
+        contentType: false
+      }).success(function(){
+        window.location.href = loc;
+      })
+      .fail(function (data) {
+        alert(data);
+        $('#error').html("Erro : " + data);
+      });
+    } else {
+
+    }
+
   });
 
   $(".delete-button").on("click", function (e) {
@@ -42,7 +89,7 @@ $(document).ready(function () {
       if ($(this).data('image') == image) {
         $(this).remove();
       }
-      
+
     });
   });
 });

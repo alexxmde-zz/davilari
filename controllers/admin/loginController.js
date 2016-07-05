@@ -1,10 +1,12 @@
 var userSchema = require('../../models/data/schema').User;
+var productController = require('./productController');
 
 function loginController () {
   this.get = function (req, res) {
     
-    if(req.session.isLogged) {
-      res.render("admin/pages/product");
+    if (req.session.isLogged) {
+      productController.get(req, res);
+
     } else {
     res.render("admin/pages/login");
     }

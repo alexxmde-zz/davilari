@@ -9,17 +9,23 @@
         <fieldset class="form-group">
           <label for"name">Titulo</label>
           <input class="form-control" value="<%= product.name %>" type="text" name="name" id="name" placeholder="Titulo do Produto"/>
+          <p id="name-validation"></p>
         </fieldset>
 
         <fieldset class="form-group">
           <label for"Descricao">Descricao</label>
-          <textarea class="form-control" value="<%= product.description %>" type="textarea" name="description" id="description" placeholder="Descricao"></textarea>
+          <textarea class="form-control"type="textarea" name="description" id="description" 
+                                                                           placeholder="Descricao"><%= product.description %></textarea>
+
+          <p id="description-validation"></p>
+
         </fieldset>
 
 
         <fieldset class="form-group">
           <label for"name">Preco</label>
           <input class="form-control" value="<%= product.price %>" type="text" name="price" id="price" placeholder="price"/>
+          <p id="price-validation"></p>
         </fieldset>
 
         <% if (product.images) { %>
@@ -43,21 +49,36 @@
 
         <% } %>
 
+        
         <fieldset class="form-group">
-          <label>Imagem Principal</label>
-          <input class="form-control" type="file" id="mainImage" name="mainImage"/>
-        </fieldset>
-
-
-        <fieldset class="form-group">
-          <label>Imagens</label>
+          <label>Adicionar Imagens</label>
           <input class="form-control" type="file" multiple  id="images" name="images"/>
+          <p id="images-validation"></p>
         </fieldset>
+        <% if (product.mainImage) { %>
+        <h2>Imagem Principal </h2>
+        <img class="img img-responsive img-main"
+             src="/resources/img/products/<%= product.mainImage %>" />
+        <% } %>
+        
+<fieldset class="form-group">
+          <label>Adicionar Imagem Principal</label>
+          <input class="form-control" type="file" id="mainImage" name="mainImage"/>
+          <p id="mainImage-validation"></p>
+        </fieldset>
+
+
 
         <fieldset class="form-group">
           <button class="form-control btn btn-default">Salvar</button>
         </fieldset>
-      </form>
+             </form>
+ <a href="/admin/produtos">
+          <button class="btn btn-default">
+            Voltar
+          </button>
+        </a>
+
 
     </div>
   </div>

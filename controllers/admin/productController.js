@@ -7,7 +7,16 @@ function ProductController () {
       
     }; 
 
-    productModel.find(renderPage); 
+    var query = {};
+
+    if (req.param('search')) {
+      query = { 'name' : new RegExp('' + req.param('search') + '', "i") };
+      
+    }
+
+    console.log(query);
+
+    productModel.find(query, renderPage); 
   };
 
   this.getAdd = function(req, res) {
@@ -39,9 +48,19 @@ function ProductController () {
 
   this.put = function (req, res) {
     var product = req.body;
+    product.images = [];
+
+    if (req.files['images']) {
+
     product.images = req.files['images'].map(function (obj) {
       return obj.filename;
     });
+
+    }
+
+    if (req.files['mainImage']) {
+      product.mainImage = req.files['mainImage'][0].filename;
+    }
 
     product.old_images = JSON.parse(product.old_images);
     product.images = product.images.concat(product.old_images);
