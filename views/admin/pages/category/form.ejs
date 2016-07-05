@@ -1,0 +1,35 @@
+<% include   ../../templates/header.ejs %>
+<input type="hidden" value="<%= category._id %>" id="_id"/>
+<div class="container">
+  <div class="row">
+    <h1><%= category.name || "Nova Categoria"%></h1>
+
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2 procut-form">
+      <form id="category-form" action="/admin/categoria" method="POST">
+        <fieldset class="form-group">
+          <label for"name">Nome</label>
+          <input class="form-control" value="<%= category.name %>" type="text" name="name" id="name" placeholder="Titulo do Produto"/>
+          <p class="validation" id="name-validation"></p>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <label for"Descricao">Descrição</label>
+          <textarea class="form-control"type="textarea" name="description" id="description" 
+           placeholder="Descricao"><%= category.description %></textarea>
+
+          <p  class="validation" id="description-validation"></p>
+
+        </fieldset>
+
+        <button class="form-control btn btn-success"> Salvar </button>
+        
+      </form>
+      <a href="/admin/categorias">
+        <button type="button" class="form-control btn btn-default">
+          Voltar
+        </button>
+    </div>
+  </div>
+</div>
+
+<% include ../../templates/footer.ejs %>

@@ -33,6 +33,10 @@ connection.connect(function (err, mongoose) {
     'description' : String
 
   }));
+
+  this.Sale = mongoose.model("Sale", mongoose.Schema({
+    
+  }));
   }
 
 module.exports = new Schema();

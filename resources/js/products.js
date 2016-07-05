@@ -1,5 +1,5 @@
 $(document).ready(function () {
-  $('form').on('submit', function (e) {
+  $('#product-form').on('submit', function (e) {
     e.preventDefault();
 
     var validateProduct = function (data) {
@@ -44,7 +44,7 @@ $(document).ready(function () {
 
     var url = "/admin/produtos/novo";
     var method = "POST";
-    var data = new FormData($('form')[0]);
+    var data = new FormData($('#product-form')[0]);
     var loc = "/admin/produtos";
 
     if($('#_id').val()) {

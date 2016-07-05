@@ -1,0 +1,41 @@
+<% include ../../templates/header.ejs %>
+<div class="container">
+  <div class="row">
+    <header class="category-heade col-xs-12">
+      <h1>Categorias</h1>
+    </header>
+    <article class="col-xs-12">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Categoria</th>
+            <th>Descrição</th>
+          </tr>
+          
+        </thead>
+        <tbody>
+          <% categories.forEach(function(cat) { %>
+          <tr>
+            <td><%= cat.name %></td>
+            <td><%= cat.description %></td>
+            <td><a href="/admin/categoria/<%= cat._id %>">
+                <button type="button" class="btn btn-default">
+                  <span class="glyphicon glyphicon-edit"></span>
+                </button>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </article>
+  </div>
+  <div class="row">
+    <section class="col-xs-12">
+      <a href="/admin/categoria">
+        <button type="button" class="btn btn-default">
+          Novo
+        </button>
+    </section>
+  </div>
+</div>
+
+<% include ../../templates/footer.ejs %>

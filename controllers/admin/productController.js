@@ -1,4 +1,5 @@
 var productModel = require('../../models/data/schema.js').Product;
+var categoryModel = require('../../models/data/schema.js').Category;
 
 function ProductController () {
   this.get = function (req, res) {
@@ -20,7 +21,10 @@ function ProductController () {
   };
 
   this.getAdd = function(req, res) {
-    res.render('admin/pages/product/form', {"product" : {}});
+    categoryModel.find(function(err, categories) { 
+
+    res.render('admin/pages/product/form', {"product" : {}, "categories" : categories});
+    });
   };
 
   this.post = function (req, res) {

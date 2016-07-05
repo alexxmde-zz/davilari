@@ -5,7 +5,7 @@
     <h1><%= product.name || "Novo Produto"%></h1>
 
     <div class="col-xs-12 col-sm-8 col-sm-offset-2 procut-form">
-      <form id="product-form" action="/admin/produtos/novo" method="POST" enctype="multipart/form-data">
+      <form action="/admin/produtos/novo" method="POST" enctype="multipart/form-data">
         <fieldset class="form-group">
           <label for"name">Nome</label>
           <input class="form-control" value="<%= product.name %>" type="text" name="name" id="name" placeholder="Titulo do Produto"/>
@@ -16,18 +16,10 @@
           <label for"Descricao">Descrição</label>
           <textarea class="form-control"type="textarea" name="description" id="description" 
                                                                            placeholder="Descricao"><%= product.description %></textarea>
+
           <p  class="validation" id="description-validation"></p>
+
         </fieldset>
-        <fieldset class="form-group">
-          <label for="category">Categoria</label>
-          <select name="category" class="">
-            <% categories.forEach(function(cat) { %>
-                <option value="<%= cat._id %>"><%= cat.name %></option>
-            <% }); %>
-          
-              
-          </select>
-          </fieldset>
 
 
         <fieldset class="form-group">
