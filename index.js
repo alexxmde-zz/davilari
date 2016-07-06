@@ -19,6 +19,7 @@ app.use(session({secret: 'donniebrasco'}));
 
 app.set('view engine', 'ejs');
 app.use('/resources', express.static('resources'));
+app.use('/', express.static('client'));
 app.use('/admin', adminRouter);
 
 app.get('/', publicRouter);

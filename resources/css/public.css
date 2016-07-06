@@ -1,0 +1,52 @@
+.logo-header {
+  width:100%;
+  height:100%;
+}
+
+.nav-container {
+  height:60px;
+  background-color:grey;
+}
+
+.no-padding {
+  padding:0;
+}
+
+.header-categories {
+  margin-bottom:30px;
+  border-right:1px solid #c3c3c3;
+}
+
+.header-category {
+  font-size:18px;
+  color:#3e3e3e;
+}
+
+.separator{
+  background-color: #3e3e3e;
+  height:60px;
+  width:1px;
+  float:left;
+  margin-top:20px;
+  margin-bottom:20px;
+}
+
+.header {
+  height: 180px;
+}
+
+.header-top{
+  margin-top:20px;
+}
+
+.c-info span {
+  font-size:18px;
+}
+
+
+@media only screen and (min-width : 768px) {
+.varanda-container {
+  margin-top:20px;
+}
+
+      }

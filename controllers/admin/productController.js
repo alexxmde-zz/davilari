@@ -44,8 +44,6 @@ function ProductController () {
 
       res.status(200).send("OK");
 
-
-
     });
 
   };
@@ -81,7 +79,14 @@ function ProductController () {
 
   this.getOne = function (req, res) {
     productModel.findOne({"_id" : req.params.id}, function (err, product) {
-      res.render('admin/pages/product/form', {"product" : product});
+      console.log(product);
+      categoryModel.find(function(err, categories) {
+        res.render('admin/pages/product/form',
+          { "product" : product,
+            "categories" : categories
+          }
+        );
+      });
       
     });
   };
