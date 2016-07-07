@@ -3,12 +3,14 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
     adminRouter = require('./routes/admin'),
-    publicRouter = require('./routes/public');
+    publicRouter = require('./routes/public'),
+    apiRouter = require('./routes/api'),
+    sessionCheck = require('./middlewares/session');
 
 
 app = express(),
 ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
-port = process.env.OPENSHIFT_NODEJS_PORT || '3000';
+port = process.env.OPENSHIFT_NODEJS_PORT || '8000';
 
 
 app.use(bodyParser.urlencoded({extended: true}));
@@ -20,7 +22,8 @@ app.use(session({secret: 'donniebrasco'}));
 app.set('view engine', 'ejs');
 app.use('/resources', express.static('resources'));
 app.use('/', express.static('client'));
-app.use('/admin', adminRouter);
+app.use('/admin', sessionCheck, adminRouter);
+app.use('/api', apiRouter);
 
 app.get('/', publicRouter);
 

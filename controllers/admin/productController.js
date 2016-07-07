@@ -2,6 +2,13 @@ var productModel = require('../../models/data/schema.js').Product;
 var categoryModel = require('../../models/data/schema.js').Category;
 
 function ProductController () {
+  this.api = {};
+  this.api.get = function (req, res) {
+    productModel.find(function(err, products) {
+      res.status(200).json(products);
+    });
+  };
+
   this.get = function (req, res) {
     function renderPage (err, products) {
       res.render('admin/pages/product', {"products" : products});

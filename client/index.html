@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="/resources/css/public.css">
   </head>
   <body>
-    <div class="container-fluid">
+    <div class="container">
       <div class="row">
         <header class="header">
           <div class="no-padding col-sm-3 col-xs-12">
@@ -35,21 +35,24 @@
               </div>
               
             </div>
-            <nav class="nav-container navbar navbar-default col-xs-12">
-              <ul class="nav navbar-nav">
-                <li><a href="#">Produtos</a></li>
-                <li><a href="#">Ambientes</a></li>
-                <li><a href="#">Acabamentos</a></li>
-                <li><a href="#">Orçamento"</a></li>
-                <li><a href="#">Localização</a></li>
-              </ul>
-             
+            <nav class="text-center nav-container navbar navbar-default col-xs-12">
+                <ul class="nav navbar-nav col-sm-offset- col-xs-12">
+                  <li><a href="#">Produtos</a></li>
+                  <li><a href="#">Ambientes</a></li>
+                  <li><a href="#">Acabamentos</a></li>
+                  <li><a href="#">Orçamento</a></li>
+                  <li><a href="#">Localização</a></li>
+                </ul>
+
             </nav>
           </div>
         </header>
       </div>
-    </div>
-    <div id="content">
+      <div class="row">
+        <article id="content">
+        </article>
+      </div>
+
     </div>
   </body>
 
@@ -57,6 +60,7 @@
   <script src="/resources/vendor/babel/browser.min.js"></script>
   <script src="/resources/vendor/react/react.min.js"></script>
   <script src="/resources/vendor/react/react-dom.min.js"></script>
+  <script src="/resources/vendor/jquery/jquery-2.2.4.min.js"></script>
 
   <script type="text/babel" src="app/index.js">
   </script>

@@ -15,6 +15,7 @@ function loginController () {
 
 
   this.post = function (req, res) {
+    
     userSchema.findOne({username: req.body.username} , function (err, user) {
       if (err) {
         console.error(err);

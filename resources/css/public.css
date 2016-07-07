@@ -4,8 +4,8 @@
 }
 
 .nav-container {
-  height:60px;
-  background-color:grey;
+  height:65px;
+  background-color:#2f2f2f;
 }
 
 .no-padding {
@@ -13,7 +13,7 @@
 }
 
 .header-categories {
-  margin-bottom:30px;
+  margin-bottom:20px;
   border-right:1px solid #c3c3c3;
 }
 
@@ -24,7 +24,7 @@
 
 .separator{
   background-color: #3e3e3e;
-  height:60px;
+  height:65px;
   width:1px;
   float:left;
   margin-top:20px;
@@ -46,7 +46,46 @@
 
 @media only screen and (min-width : 768px) {
 .varanda-container {
-  margin-top:20px;
+  margin-top:26px;
 }
 
       }
+
+.nav-container ul li a {
+  font-size:18px;
+  color:white !important;
+  text-transform:uppercase;
+  text-decoration:underline;
+  font-family:Sans;
+}
+
+.nav-container ul li {
+  margin-left:10px;
+  
+}
+
+.nav-container ul {
+  margin-top:5px;
+}
+
+.title-product-box {
+  letter-spacing:12px;
+  margin-bottom:40px;
+}
+
+.img-product {
+  width:90%;
+  height:250px;
+  margin-bottom:0;
+}
+
+.title-product {
+  margin-top:10px;
+  font-size:22px;
+  font-weight:bold;
+}
+
+.price-product {
+  margin-top:0;
+  font-size:18px;
+}
