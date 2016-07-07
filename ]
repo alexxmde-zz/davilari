@@ -10,31 +10,25 @@
     <div class="container-fluid">
       <div class="row">
         <header class="header">
-          <div class="header-top col-sm-12 col-md-12 col-xs-12 no-padding">
-            <div class="no-padding col-sm-3 col-xs-12">
-              <img class="logo-header img img-responsive" src="/resources/img/logo-new.jpg" />
-            </div>
-
-            <div class="header-categories col-sm-4 col-md-4 col-xs-12">
-              <div class="header-category text-center col-lg-6 col-sm-12 col-xs-12">
+          <div class="no-padding hidden-sm col-sm-3 col-xs-12">
+            <img class="logo-header img img-responsive" src="/resources/img/logo-new.jpg" />
+          </div>
+          <div class="header-top col-sm-12 col-md-9 col-xs-12 no-padding">
+ <div class="no-padding  col-sm-4 col-xs-12">
+            <img class="logo-header img img-responsive" src="/resources/img/logo-new.jpg" />
+          </div>
+            <div class="header-categories col-sm-4 col-xs-12">
+              <div class="header-category text-center col-sm-6 col-xs-12">
                 <span>Móveis em Aumínio</span>
               </div>
-              <div class="header-category text-center col-lg-6 col-sm-12 col-md-6 col-xs-12">
+              <div class="header-category text-center col-sm-6 col-xs-12">
                 <span>Móveis para Piscina</span>
               </div>
               <div class="header-category varanda-container col-xs-12 col-sm-12 text-center">
                 <span>Móveis para Varanda</span>
               </div>
-<div class="header-category col-xs-12 col-sm-6 text-center">
-                <span>Móveis para Varanda</span>
-              </div>
-
-              <div class="header-category col-xs-12 col-sm-6 text-center">
-                <span>Móveis para Varanda</span>
-              </div>
-
             </div>
-            <div class="hidden-xs col-sm-5 c-info text-right">
+            <div class="hidden-xs col-sm-6 c-info text-right">
               <div class="c-cidade col-xs-12">
                 <span>Vargem Grande Paulista</span>
               </div>
@@ -44,22 +38,9 @@
               <div class="c-whatsapp col-xs-12">
                 <span>Whatsapp: (11) 97595-1164 </span>
               </div>
-
+              
             </div>
             <nav class="text-center nav-container navbar navbar-default col-xs-12">
-
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle collapsed"
-                                      data-toggle="collapse" data-target="#myNav" aria-expanded="false">
-                  <span class="sr-only">Toggle navigation</span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand visible-xs" href="#">Davilari</a>
-              </div>
-
-              <div class="col-sm-12 col-lg-offset-2 collapse navbar-collapse" id="myNav">
                 <ul class="nav navbar-nav col-sm-offset- col-xs-12">
                   <li><a href="#">Produtos</a></li>
                   <li><a href="#">Ambientes</a></li>
@@ -67,7 +48,6 @@
                   <li><a href="#">Orçamento</a></li>
                   <li><a href="#">Localização</a></li>
                 </ul>
-              </div>
 
             </nav>
           </div>
@@ -86,7 +66,6 @@
   <script src="/resources/vendor/react/react.min.js"></script>
   <script src="/resources/vendor/react/react-dom.min.js"></script>
   <script src="/resources/vendor/jquery/jquery-2.2.4.min.js"></script>
-  <script src="/resources/vendor/bootstrap/js/bootstrap.min.js"></script>
 
   <script type="text/babel" src="app/index.js">
   </script>

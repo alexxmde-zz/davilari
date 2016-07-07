@@ -4,7 +4,6 @@
 }
 
 .nav-container {
-  height:65px;
   background-color:#2f2f2f;
 }
 
@@ -39,17 +38,16 @@
   margin-top:20px;
 }
 
+.c-info {
+  background-color: rgb(255, 253, 169);
+  margin-top: 30px;
+
+}
+
 .c-info span {
   font-size:18px;
 }
 
-
-@media only screen and (min-width : 768px) {
-.varanda-container {
-  margin-top:26px;
-}
-
-      }
 
 .nav-container ul li a {
   font-size:18px;
@@ -59,19 +57,80 @@
   font-family:Sans;
 }
 
+
+
+.title-product-box {
+  letter-spacing:12px;
+  margin-bottom:40px;
+  
+}
+
+@media only screen and (min-width : 768px) {
+  .varanda-container {
+    margin-top:26px;
+    margin-bottom:26px;
+  }
+}
+
+@media (min-width: 768px) {
+  .logo-header {
+    height:150px;
+  }
+}
+
+@media (max-width:768px) {
+  .logo-header {
+    margin-bottom:20px;
+  }
+
+  .nav-container{
+    position:fixed;
+    top:0;
+    z-index:1;
+  }
+  .navbar-default
+  .navbar-brand {
+    color: white;
+    font-size: 24px;
+    font-weight: bold;
+    padding-left: 0;
+  }
+
+  .nav-container ul li a {
+    text-decoration:none;
+  }
+
+  .header {
+    margin-top:65px;
+  }
+  .header-top {
+    border-bottom:1px solid #c3c3c3;
+  }
+
+  .title-product-box {
+    letter-spacing:3px;
+  }
+
+  .info-box{
+    margin-bottom:35px;
+ 
+  }
+}
+
+.icon-bar {
+  background-color:white;
+}
+
+
 .nav-container ul li {
   margin-left:10px;
-  
+
 }
 
 .nav-container ul {
   margin-top:5px;
 }
 
-.title-product-box {
-  letter-spacing:12px;
-  margin-bottom:40px;
-}
 
 .img-product {
   width:90%;

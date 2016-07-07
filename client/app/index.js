@@ -6,9 +6,13 @@ var Product = React.createClass({
   render: function () {
     return(
       <div className="product col-sm-4">
+        <div className="img-box text-center">
         <img className="img-product" src={"/resources/img/products/" + this.props.mainImage} />
+      </div>
+      <div className="info-box col-xs-12">
         <h2 className="title-product">{this.props.name}</h2>
         <h3 className="price-product">{"R$"+this.props.price+",00"}</h3>
+      </div>
       </div>);
 
   }
