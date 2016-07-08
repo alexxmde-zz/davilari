@@ -1,6 +1,13 @@
 var categoryModel = require('../../models/data/schema').Category;
 
 function CategoryModel () {
+  this.api = {};
+
+  this.api.get = function (req, res) {
+    categoryModel.find(function(err, cats) {
+      res.status(200).json(cats);
+    });
+  }
    var renderPage = function (res, page, data) {
 
       res.render(page, data);

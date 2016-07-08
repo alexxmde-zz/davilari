@@ -21,11 +21,11 @@ app.use(session({secret: 'donniebrasco'}));
 
 app.set('view engine', 'ejs');
 app.use('/resources', express.static('resources'));
-app.use('/', express.static('client'));
+//app.use('/', express.static('client'));
 app.use('/admin', sessionCheck, adminRouter);
 app.use('/api', apiRouter);
 
-app.get('/', publicRouter);
+app.use(publicRouter);
 
 
 

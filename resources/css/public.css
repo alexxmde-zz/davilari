@@ -64,6 +64,20 @@
   margin-bottom:40px;
   
 }
+a{
+  color:black;
+}
+
+.category-button {
+  height: 50px;
+  border: 1px solid black;
+  text-align: center;
+  padding-top: 15px;
+}
+
+.category {
+  margin-bottom:15px;
+}
 
 @media only screen and (min-width : 768px) {
   .varanda-container {
@@ -113,7 +127,7 @@
 
   .info-box{
     margin-bottom:35px;
- 
+
   }
 }
 
@@ -148,3 +162,10 @@
   margin-top:0;
   font-size:18px;
 }
+
+.category-button:hover {
+  background-color: #66652f;
+  color: white;
+  font-weight: bold;
+}
+
