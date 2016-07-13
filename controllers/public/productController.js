@@ -18,7 +18,7 @@ function ProductController () {
         console.log(query);
         productModel.find(query, function(err, prods) {
 
-          res.render('public/pages/products', {products : prods, categories : cats});
+          res.render('public/pages/products', {products : prods, categories : cats, queryCategory: categoryToFind});
         });
       });
     });

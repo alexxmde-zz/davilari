@@ -1,6 +1,6 @@
 <% include ../../templates/header.ejs %>  
-<div class="row">
-  <div class="category-list col-xs-12">
+<div class="row r-products">
+  <div class="hidden-xs category-list col-xs-12">
     <% categories.forEach(function(cat) { %>
     <div class="category col-xs-12 col-sm-3">
       <a href="/produtos?categoria=<%= cat.name %>">
@@ -20,6 +20,18 @@
     <div class="productBox ">
       <h1 class="title-product-box text-center">Produtos</h1>
     </div>
+<div class="visible-xs text-center productSelect">
+  
+      <select class="form-control text-center">
+        <option class="text-center selectText"> Selecione a Categoria  </option>
+        <% categories.forEach(function(cat) { %>
+        <option value="<%= cat.name %>"><%= cat.name %></option>
+        <% }); %>
+      </select>
+      
+    </div>
+
+      <h2 class="product-category text-center"><%= queryCategory %></h2>
     <div class="productList">
       <% products.forEach(function(prod) { %>
       <div class="product col-sm-4">
@@ -33,7 +45,7 @@
       </div>
       <% }); %>
     </div>
-
+    
   </article>
 </div>
 
