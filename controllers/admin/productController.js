@@ -1,5 +1,5 @@
-var productModel = require('../../models/data/schema.js').Product;
-var categoryModel = require('../../models/data/schema.js').Category;
+var productDAO = require('../../models/data/mysql/productDAO');
+var categoryDAO= require('../../models/data/mysql/categoryDAO.js');
 
 function ProductController () {
   this.api = {};
@@ -10,27 +10,53 @@ function ProductController () {
   };
 
   this.get = function (req, res) {
-    function renderPage (err, products) {
-      res.render('admin/pages/product', {"products" : products});
-      
-    }; 
-
-    var query = {};
+    var _products = [];
 
     if (req.param('search')) {
-      query = { 'name' : new RegExp('' + req.param('search') + '', "i") };
-      
+ productDAO.findByName(req.param('search'), function(err, products) {
+        if (err) {
+          console.log(err);
+          return res.status(500).send(err);
+        }
+
+        res.render("admin/pages/product", {products : products});
+      });
+
+    } else {
+
+      productDAO.findAll(function(err, products) {
+        if (err) {
+          console.log(err);
+          return res.status(500).send(err);
+        }
+
+        res.render("admin/pages/product", {products : products});
+      });
+
     }
+    /*
+       function renderPage (err, products) {
+       res.render('admin/pages/product', {"products" : products});
 
-    console.log(query);
+       }; 
 
-    productModel.find(query, renderPage); 
+       var query = {};
+
+       if (req.param('search')) {
+       query = { 'name' : new RegExp('' + req.param('search') + '', "i") };
+
+       }
+
+       console.log(query);
+
+       productModel.find(query, renderPage); 
+       */
   };
 
   this.getAdd = function(req, res) {
-    categoryModel.find(function(err, categories) { 
+    categoryDAO.findAll(function(err, categories) { 
 
-    res.render('admin/pages/product/form', {"product" : {}, "categories" : categories});
+      res.render('admin/pages/product/form', {"product" : {}, "categories" : categories});
     });
   };
 
@@ -43,8 +69,9 @@ function ProductController () {
 
     product.mainImage = req.files['mainImage'][0].filename;
 
-    productModel.create(product, function (err, prod) {
+    productDAO.insert(product, function (err, prod) {
       if (err) {
+        console.log(err);
         res.status(500).send(err);
         return;
       } 
@@ -61,9 +88,9 @@ function ProductController () {
 
     if (req.files['images']) {
 
-    product.images = req.files['images'].map(function (obj) {
-      return obj.filename;
-    });
+      product.images = req.files['images'].map(function (obj) {
+        return obj.filename;
+      });
 
     }
 
@@ -94,7 +121,7 @@ function ProductController () {
           }
         );
       });
-      
+
     });
   };
 }

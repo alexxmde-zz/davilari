@@ -14,10 +14,10 @@ function Session() {
       return next();
     
     if (verifySession(req)) {
-      next();
+     return  next();
     }
     else {
-      res.status(500).render('admin/pages/login');
+     return res.status(500).render('admin/pages/login');
     }
   };
 }

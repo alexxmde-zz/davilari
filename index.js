@@ -3,8 +3,8 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
     adminRouter = require('./routes/admin'),
-    publicRouter = require('./routes/public'),
-    apiRouter = require('./routes/api'),
+    //    publicRouter = require('./routes/public'),
+    // apiRouter = require('./routes/api'),
     sessionCheck = require('./middlewares/session');
 
 
@@ -22,10 +22,10 @@ app.use(session({secret: 'donniebrasco'}));
 app.set('view engine', 'ejs');
 app.use('/resources', express.static('resources'));
 //app.use('/', express.static('client'));
-app.use('/admin', sessionCheck, adminRouter);
-app.use('/api', apiRouter);
+app.use('/admin',  adminRouter);
+//app.use('/api', apiRouter);
 
-app.use(publicRouter);
+//app.use(publicRouter);
 
 
 
