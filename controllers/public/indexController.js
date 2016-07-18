@@ -1,7 +1,15 @@
+var saleDAO = require("../../models/data/mysql/saleDAO");
+
 function IndexController () {
 
   this.get = function (req, res) {
-    res.render('public/pages/index');
+    saleDAO.findAll()
+      .then(function resolve(sales) {
+        res.render('public/pages/index', {"sales" : sales});
+      },
+      function reject(err) {
+        res.render('public/pages/error', {error : err});
+      });
   };
 }
 

@@ -10,7 +10,7 @@ function categoryDAO() {
 
       if (err) return cb(err);
 
-      var category = rows[0];
+      var category = rows;
       return cb(null, category);
 
     });

@@ -1,6 +1,6 @@
 <% include ../../templates/header.ejs %>  
 <div class="row r-products">
-  <div class="hidden-xs category-list col-xs-12">
+  <div class="hidden-xs padding-sides category-list col-xs-12">
     <% categories.forEach(function(cat) { %>
     <div class="category col-xs-12 col-sm-3">
       <a href="/produtos?categoria=<%= cat.name %>">
@@ -32,9 +32,9 @@
     </div>
 
       <h2 class="product-category text-center"><%= queryCategory %></h2>
-    <div class="productList">
+    <div class="col-xs- 12 padding-sides productList">
       <% products.forEach(function(prod) { %>
-      <div class="product col-sm-4">
+      <div class="product col-sm-6 col-md-4">
         <div class="img-box text-center">
           <img class="img-product" src="/resources/img/products/<%= prod.mainImage %>" />
         </div>

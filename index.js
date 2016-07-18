@@ -3,7 +3,7 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     session = require('express-session'),
     adminRouter = require('./routes/admin'),
-    //    publicRouter = require('./routes/public'),
+        publicRouter = require('./routes/public'),
     // apiRouter = require('./routes/api'),
     sessionCheck = require('./middlewares/session');
 
@@ -25,7 +25,7 @@ app.use('/resources', express.static('resources'));
 app.use('/admin',  adminRouter);
 //app.use('/api', apiRouter);
 
-//app.use(publicRouter);
+app.use(publicRouter);
 
 
 

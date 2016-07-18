@@ -1,22 +1,22 @@
-var productModel = require('../../models/data/schema').Product;
+var productDAO = require('../../models/data/mysql/productDAO');
 
-categoryModel = require('../../models/data/schema').Category;
+categoryDAO= require('../../models/data/mysql/categoryDAO');
 function ProductController () {
   
 
   this.get = function (req, res) {
     console.log(req.param('categoria'));
     var categoryToFind = req.param('categoria');
+    console.log("Finding products");
 
-    categoryModel.find(function(err, cats) {
-      categoryModel.find({name : categoryToFind}, function(err, cat) {
+    debugger;
+    categoryDAO.findAll(function(err, cats) {
+      categoryDAO.findByName(categoryToFind, function(err, cat) {
         var query = {};
-        console.log(cat[0]);
         if (cat[0]) {
           query = {'category':  cat[0]._id};
         }
-        console.log(query);
-        productModel.find(query, function(err, prods) {
+        productDAO.findAll(function(err, prods) {
 
           res.render('public/pages/products', {products : prods, categories : cats, queryCategory: categoryToFind});
         });

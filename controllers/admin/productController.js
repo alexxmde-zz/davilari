@@ -34,23 +34,6 @@ function ProductController () {
       });
 
     }
-    /*
-       function renderPage (err, products) {
-       res.render('admin/pages/product', {"products" : products});
-
-       }; 
-
-       var query = {};
-
-       if (req.param('search')) {
-       query = { 'name' : new RegExp('' + req.param('search') + '', "i") };
-
-       }
-
-       console.log(query);
-
-       productModel.find(query, renderPage); 
-       */
   };
 
   this.getAdd = function(req, res) {
@@ -67,24 +50,29 @@ function ProductController () {
       return obj.filename;
     }); //SANTO MAP
 
+    //Um dia isso vai ser N
+    product.categories = []; 
+    product.categories.push(product.category);
+
     product.mainImage = req.files['mainImage'][0].filename;
 
-    productDAO.insert(product, function (err, prod) {
+    productDAO.insert(product, function (err) {
       if (err) {
-        console.log(err);
         res.status(500).send(err);
-        return;
-      } 
 
-      res.status(200).send("OK");
+      }  else {
+        return res.status(200).send("OK");
+
+      }
 
     });
 
   };
 
   this.put = function (req, res) {
+    
     var product = req.body;
-    product.images = [];
+        product.images = [];
 
     if (req.files['images']) {
 
@@ -101,27 +89,31 @@ function ProductController () {
     product.old_images = JSON.parse(product.old_images);
     product.images = product.images.concat(product.old_images);
 
-    productModel.update({"_id" : req.params.id}, product, function (err, prod) {
-      if (err) 
-        return console.error(err);
+    product.IdProduct = req.params.id;
+
+    product.categories = [];
+    product.categories.push(product.category);
+
+    productDAO.update(product, function (err, prod) {
 
       res.status(200).send("OK");
 
+    }, function(err) {
+      return res.status(500).send(err);
     });
 
   };
 
   this.getOne = function (req, res) {
-    productModel.findOne({"_id" : req.params.id}, function (err, product) {
-      console.log(product);
-      categoryModel.find(function(err, categories) {
-        res.render('admin/pages/product/form',
-          { "product" : product,
-            "categories" : categories
-          }
+    productDAO.findOne(req.params.id, function (err, prod) {
+      if (err) return res.status(500).send(err);
+      categoryDAO.findAll(function(err, cats) {
+        if(err) return res.status(500).send(err);
+        console.log(prod);
+        res.render('admin/pages/product/form', 
+          {product : prod, categories : cats}
         );
       });
-
     });
   };
 }

@@ -1,5 +1,5 @@
 <% include   ../../templates/header.ejs %>
-<input type="hidden" value="<%= product.IdProduto %>" id="_id"/>
+<input type="hidden" value="<%= product.IdProduct %>" id="_id"/>
 <div class="container">
   <div class="row">
     <h1><%= product.name || "Novo Produto"%></h1>
@@ -25,10 +25,10 @@
 
             <% categories.forEach(function(cat) { %>
             <option
-                                                value="<%= cat._id %>"
+                                                value="<%= cat.IdCategory %>"
                                                 <%
-                                                if(product.category) {
-                                                if (cat._id.toString() == product.category.toString()) { %>
+                                                if(product.categories) {
+                                                if (cat.IdCategory.toString() == product.categories[0].toString()) { %>
                                                 selected
                                                 <% }
                                                 } %>
@@ -80,7 +80,7 @@
         </fieldset>
         <% if (product.mainImage) { %>
         <h2>Imagem Principal </h2>
-        <img class="img img-responsive img-main"
+        <img data-image="<%= product.mainImage %>" id="mainImage" class="img img-responsive img-main"
              src="/resources/img/products/<%= product.mainImage %>" />
              <% } %>
 
@@ -90,11 +90,16 @@
                <p class="validation" id="mainImage-validation"></p>
              </fieldset>
 
-
-
              <fieldset class="form-group">
-               <button class="form-control btn btn-success">Salvar</button>
+               <label>Ambiente</label> <input type="checkbox" <% if (product.ambiente) { %>checked <% } %> 
+               name="ambiente" />
              </fieldset>
+
+
+
+               <fieldset class="form-group">
+                 <button class="form-control btn btn-success">Salvar</button>
+               </fieldset>
       </form>
       <a href="/admin/produtos">
         <button class="form-control btn btn-default">

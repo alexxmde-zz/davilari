@@ -29,6 +29,11 @@ $(document).ready(function () {
         if (!isUpdate) {
           $("#mainImage-validation").text("Campo obrigatorio!");
           isValid = false;
+        } else {
+          if(!$("#mainImage").data("image")) {
+            $("#mainImage-validation").text("Campo obrigatorio!");
+            isValid = false;
+          }
         }
       }
 
@@ -71,11 +76,11 @@ $(document).ready(function () {
         processData: false,
         contentType: false
       }).success(function(){
-        window.location.href = loc;
+               window.location.href = loc;
       })
-      .fail(function (data) {
-        alert(data);
-        $('#error').html("Erro : " + data);
+      .fail(function (xhr, type, error) {
+        alert(xhr.responseText);
+        $('#error').html("Erro : " + xhr.responseText);
       });
     } else {
 

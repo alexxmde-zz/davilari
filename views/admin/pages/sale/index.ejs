@@ -7,7 +7,7 @@
 
       <section class="col-sm-6 col-xs-12">
         
-      <form action="/admin/produtos" method="GET">
+      <form action="/admin/promocao" method="GET">
      <span class="glyphicon glyphicon-search"></span>
       <input type="text" id="search" name="search" />
       <input type="submit" class="btn btn-default" id="search-button" type="button"
@@ -19,20 +19,25 @@
       <table class="table table-striped">
         <thead>
           <tr>
-            <th>Produto</th>
+            <th>Promocao</th>
             <th>Descrição</th>
-            <th>Preço</th>
+            <th>Subdescricao</th>
+            <th>Link</th>
+            <th>Ativa</th>
             <th>Ações</th>
           </tr>
         </thead>
         <tbody>
-          <% products.forEach(function(prod) { %>
+          <% sales.forEach(function(s) { %>
           <tr>
-            <td> <%= prod.name %> </td>
-            <td> <%= prod.description %> </td>
-            <td> <%= prod.price %> </td>
+            <td> <%= s.name %> </td>
+            <td> <%= s.description %> </td>
+            <td> <%= s.subdescription %> </td>
+            <td> <%= s.link %> </td>
+            <td> <%= s.active%> </td>
+
             <td>
-              <a href="/admin/produto/<%= prod._id %>">
+              <a href="/admin/promocao/<%= s.IdSale %>">
                 <button class="btn btn-default">
                   <span class="glyphicon glyphicon-edit"></span>
                 </button>
@@ -43,7 +48,7 @@
     </article>
 
     <footer>
-      <a href="/admin/produtos/novo"><button class="btn btn-default">Novo</button>
+      <a href="/admin/promocao"><button class="btn btn-default">Novo</button>
     </footer>
   </div>
 </div>
