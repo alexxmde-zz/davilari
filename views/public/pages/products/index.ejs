@@ -3,7 +3,14 @@
   <div class="hidden-xs padding-sides category-list col-xs-12">
     <% categories.forEach(function(cat) { %>
     <div class="category col-xs-12 col-sm-3">
+      <% if (ambiente) { %>
+
+      <a href="/ambientes?categoria=<%= cat.name %>">
+        <% } else {%>
+
       <a href="/produtos?categoria=<%= cat.name %>">
+        <% } %>
+        
         <div class="category-button">
           <%= cat.name %>
         </div>
@@ -18,7 +25,13 @@
 <div class="row">
   <article id="product-content">
     <div class="productBox ">
-      <h1 class="title-product-box text-center">Produtos</h1>
+      <h1 class="title-product-box text-center">
+        <% if (ambiente) { %>
+        Ambientes
+        <% } else { %>
+        Produtos
+        <% } %>
+      </h1>
     </div>
 <div class="visible-xs text-center productSelect">
   
@@ -34,18 +47,20 @@
       <h2 class="product-category text-center"><%= queryCategory %></h2>
     <div class="col-xs- 12 padding-sides productList">
       <% products.forEach(function(prod) { %>
-      <div class="product col-sm-6 col-md-4">
-        <div class="img-box text-center">
-          <img class="img-product" src="/resources/img/products/<%= prod.mainImage %>" />
+      <a href="/produto/<%= prod.IdProduct %>">
+        <div class="product col-sm-6 col-md-4">
+          <div class="img-box text-center">
+            <img class="img-product" src="/resources/img/products/<%= prod.mainImage %>" />
+          </div>
+          <div class="info-box col-xs-12">
+            <h2 class="title-product"><%= prod.name %></h2>
+            <h3 class="price-product"><%= "R$"+prod.price+",00" %></h3>
+          </div>
         </div>
-        <div class="info-box col-xs-12">
-          <h2 class="title-product"><%= prod.name %></h2>
-          <h3 class="price-product"><%= "R$"+prod.price+",00" %></h3>
-        </div>
-      </div>
+      </a>
       <% }); %>
     </div>
-    
+
   </article>
 </div>
 

@@ -241,12 +241,28 @@ padding-left: 15px;
   margin-bottom:35px;
 
 }
+#image-carousel > .carousel-inner > .item > a > img, .carousel-inner > .item > img, .img-responsive, .thumbnail a > img, .thumbnail > img
+.carousel-image {
+  height:400px;
+}
+.carousel-control.left, .carousel-control.right {
+  background:none;
+}
+
+.carousel-control.black {
+  color:black;
+}
 
 }
 
 /* Extra Small Devices, Phones */ 
 @media only screen and (min-width : 480px) {
-
+#image-carousel > .carousel-inner > .item > a  > img, 
+.carousel-inner > .item > img, .img-responsive,
+.thumbnail a > img, .thumbnail > img
+.carousel-image {
+  height:550px;
+}
 }
 
 /* Small Devices, Tablets */

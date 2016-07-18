@@ -8,6 +8,7 @@ function IndexController () {
         res.render('public/pages/index', {"sales" : sales});
       },
       function reject(err) {
+        console.log(err);
         res.render('public/pages/error', {error : err});
       });
   };

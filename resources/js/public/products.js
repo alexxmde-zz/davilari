@@ -7,3 +7,8 @@ $(document).ready(function() {
     window.location = "/produtos?categoria=" + selected;
   });
 });
+
+$('#image-carousel').carousel({
+  interval: false
+});
+

@@ -10,7 +10,7 @@ function categoryDAO() {
 
       if (err) return cb(err);
 
-      var category = rows;
+      var category = rows[0];
       return cb(null, category);
 
     });
@@ -30,6 +30,7 @@ function categoryDAO() {
   };
 
   this.findAll = function(cb) {
+    debugger;
     var query = "SELECT * FROM Tb_Category;";
 
     var categories = [];
@@ -62,7 +63,7 @@ function categoryDAO() {
     var query = "UPDATE Tb_Category SET name = '" + category.name + "', ";
     query += "description = '" + category.description + "' ";
     query += "WHERE IdCategory = " + id;
-    
+
     mysql.query(query, function (err) {
       if (err) return cb(err);
 

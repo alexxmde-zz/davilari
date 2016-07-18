@@ -183,6 +183,15 @@ function productDAO() {
     });
   };
 
+  this.findAllProducts = function (cb){
+    var query = "SELECT * FROM Tb_Product WHERE ambiente = 0";
+
+    mysql.query(query, function (err, rows) {
+      if (err) return cb(err);
+      return cb(null, rows);
+    });
+  };
+
   this.findByName = function (name, cb) {
     var query = "SELECT * FROM Tb_Product ";
     query += "WHERE name LIKE '%" + name + "%'";
@@ -229,7 +238,54 @@ function productDAO() {
 
     });
 
-  }
+  };
+
+  this.findAmbientes = function () {
+    return new Promise(function (resolve, reject) {
+      var query = "SELECT * FROM Tb_Product WHERE ambiente = 1";
+      mysql.query(query, function (err, products) {
+        if (err) return reject(err);
+
+        return resolve (products);
+      });
+
+    });
+
+
+  };
+
+  this.findAmbientesByCategory = function (IdCategory) {
+    return new Promise(function (resolve, reject) {
+      var query = "SELECT * FROM Tb_Product "; 
+      query += " JOIN Tb_Product_Category USING(IdProduct) ";
+      query+= "WHERE ambiente = 1 AND IdCategory =  " + IdCategory;
+
+      mysql.query(query, function (err, products) {
+        if (err) return reject(err);
+
+        return resolve (products);
+      });
+
+    });
+
+
+  };
+
+  this.findProductByIdCategory = function (id) {
+    return new Promise(function (resolve, reject) {
+      var query = "SELECT * FROM Tb_Product ";
+      query += " JOIN Tb_Product_Category USING (IdProduct) ";
+      query += " WHERE IdCategory = " + id + " ";
+      query += "AND ambiente =0";
+
+      mysql.query(query, function (err, products) {
+        if (err) return reject (err);
+
+        return resolve (products);
+      })
+
+    });
+  };
 
 }
 

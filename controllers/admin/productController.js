@@ -50,7 +50,7 @@ function ProductController () {
       return obj.filename;
     }); //SANTO MAP
 
-    //Um dia isso vai ser N
+    //Um dia isso vai ser N categorias para 1 produto.
     product.categories = []; 
     product.categories.push(product.category);
 
