@@ -1,6 +1,6 @@
 var mysql = require('./connection');
 var utils = require('../../../utils');
-
+var Promise = require("promise");
 function saleDAO() {
   this.findAll = function() {
 
@@ -8,7 +8,7 @@ function saleDAO() {
     return new Promise (function (resolve, reject) {
 
       mysql.query(query, function (err, rows) {
-        if (err) 
+        if (err)
           return reject(err);
 
         resolve(rows);
@@ -20,7 +20,7 @@ function saleDAO() {
   this.findOne = function (id) {
     var query = "SELECT * FROM Tb_Sale \n";
     query += "WHERE IdSale = " + id;
-    
+
     return new Promise (function (resolve, reject) {
 
       mysql.query(query, function (err, rows) {
@@ -48,7 +48,7 @@ function saleDAO() {
 
   this.insert = function (sale) {
     return new Promise (function (resolve, reject) {
-      var query = "INSERT INTO Tb_Sale\n" 
+      var query = "INSERT INTO Tb_Sale\n"
       query += "(name, description, subdescription, active, link, image)\n";
       query += "VALUES (?, ?, ?, ?, ?, ?)";
       var arr = [sale.name, sale.description, sale.subdescription, utils.parseBin(sale.active),
@@ -58,7 +58,7 @@ function saleDAO() {
         if (err) return reject(err + "\n" + query);
 
     return resolve();
-        
+
       });
 
 
@@ -68,7 +68,7 @@ function saleDAO() {
   this.update = function (IdSale, sale) {
     return new Promise(function (resolve, reject) {
       var query = "UPDATE Tb_Sale SET ";
-      query += "name = '" + sale.name +"', "; 
+      query += "name = '" + sale.name +"', ";
       query += "description = '" + sale.description +"', ";
       query += "subdescription = '" + sale.subdescription + "', ";
       query += "active = " + utils.parseBin(sale.active) + ", ";

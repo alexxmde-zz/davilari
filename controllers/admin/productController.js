@@ -1,6 +1,7 @@
 var productDAO = require('../../models/data/mysql/productDAO');
 var categoryDAO= require('../../models/data/mysql/categoryDAO.js');
 
+
 function ProductController () {
   this.api = {};
   this.api.get = function (req, res) {
@@ -37,7 +38,7 @@ function ProductController () {
   };
 
   this.getAdd = function(req, res) {
-    categoryDAO.findAll(function(err, categories) { 
+    categoryDAO.findAll(function(err, categories) {
 
       res.render('admin/pages/product/form', {"product" : {}, "categories" : categories});
     });
@@ -51,7 +52,7 @@ function ProductController () {
     }); //SANTO MAP
 
     //Um dia isso vai ser N categorias para 1 produto.
-    product.categories = []; 
+    product.categories = [];
     product.categories.push(product.category);
 
     product.mainImage = req.files['mainImage'][0].filename;
@@ -70,7 +71,7 @@ function ProductController () {
   };
 
   this.put = function (req, res) {
-    
+
     var product = req.body;
         product.images = [];
 
@@ -110,7 +111,7 @@ function ProductController () {
       categoryDAO.findAll(function(err, cats) {
         if(err) return res.status(500).send(err);
         console.log(prod);
-        res.render('admin/pages/product/form', 
+        res.render('admin/pages/product/form',
           {product : prod, categories : cats}
         );
       });

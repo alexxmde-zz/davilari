@@ -31,10 +31,6 @@ app.use('/admin', sessionCheck,  adminRouter);
 
 app.use(publicRouter);
 
-
-
-
-
 app.listen(port, ip, function(err) {
   if (err) {
     console.error("Erro ao iniciar servidor: " + err);

@@ -1,13 +1,13 @@
 var mysql = require("./connection");
 var utils = require("../../../utils");
-
+var Promise = require("promise");
 function productDAO() {
 
   var lastInsertId = function (cb) {
     mysql.query("SELECT LAST_INSERT_ID() AS a", function(err, rows) {
       cb(rows[0].a);
     });
-    
+
   }
 
   var insertImages = function (images, IdProduct, cb) {
@@ -17,7 +17,7 @@ function productDAO() {
       query += "INSERT INTO Tb_Image (IdProduct, path) VALUES ( ";
       query += IdProduct + ", '" + images[i] +"'); \n";
       mysql.query(query, function(err) {
-        if (err) { 
+        if (err) {
           return cb(err);
         }
 
@@ -32,7 +32,7 @@ function productDAO() {
 
   var bindCategories = function (categories, IdProduct, cb) {
     var error;
-    
+
     for(var i = 0; i < categories.length; i++) {
 
       if (!error) {
@@ -60,13 +60,13 @@ function productDAO() {
   this.update = function (product, success, failure) {
     console.log("Updating product " + product.IdProduct);
 
-    
+
     console.log(product);
     product.ambiente = utils.parseBin(product.ambiente);
     var query = "UPDATE Tb_Product SET ";
     query += "name = '" + product.name + "', ";
     query += "description = '" + product.description + "', ";
-    if (product.mainImage) 
+    if (product.mainImage)
     query += "mainImage = '" + product.mainImage + "', ";
 
     query += "ambiente = " + product.ambiente + ", ";
@@ -74,7 +74,7 @@ function productDAO() {
     query += " WHERE IdProduct = " + product.IdProduct;
 
     mysql.query(query, function (err) {
-      if (err) 
+      if (err)
        return  failure(err);
     });
 
@@ -95,7 +95,7 @@ function productDAO() {
         }
       });
       }
-      
+
 
         console.log("Unbinding old categories");
         query = "DELETE FROM Tb_Product_Category WHERE IdProduct = " + product.IdProduct;
@@ -111,7 +111,7 @@ function productDAO() {
           console.log("Binding new categories");
           console.log(product.categories);
           bindCategories(product.categories, product.IdProduct, function (err) {
-            
+
             if (err) {
               console.log("Error binding new categories");
               console.log(err);
@@ -131,7 +131,7 @@ function productDAO() {
     product.ambiente = utils.parseBin(product.ambiente);
 
     console.log(product);
-    
+
     var query = "INSERT INTO Tb_Product (name, description, price, ambiente, mainImage) ";
     query += "VALUES ('" + product.name + "', ";
     query += "'" + product.description + "', ";
@@ -142,7 +142,7 @@ function productDAO() {
     console.log(query);
 
     mysql.query(query, function (err, rows) {
-      if (err) { 
+      if (err) {
         console.error(err);
         return cb(err);
       }
@@ -176,7 +176,7 @@ function productDAO() {
     var query = "SELECT * FROM Tb_Product";
 
     mysql.query(query, function (err, rows) {
-      if (err) return cb(err); 
+      if (err) return cb(err);
 
       return cb(null, rows);
 
@@ -256,7 +256,7 @@ function productDAO() {
 
   this.findAmbientesByCategory = function (IdCategory) {
     return new Promise(function (resolve, reject) {
-      var query = "SELECT * FROM Tb_Product "; 
+      var query = "SELECT * FROM Tb_Product ";
       query += " JOIN Tb_Product_Category USING(IdProduct) ";
       query+= "WHERE ambiente = 1 AND IdCategory =  " + IdCategory;
 

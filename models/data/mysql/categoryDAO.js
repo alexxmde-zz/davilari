@@ -1,5 +1,5 @@
 var mysql = require('./connection');
-
+var Promise = require("promise");
 function categoryDAO() {
 
   this.findByName = function(name, cb) {

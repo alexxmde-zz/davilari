@@ -1,10 +1,10 @@
 var mysql = require('./connection');
-
+var Promise = require("promise");
 
 function UserRepository() {
   this.FindByNameAndPassword = function (username, password, cb) {
 
-    var query = "SELECT * FROM Tb_User "; 
+    var query = "SELECT * FROM Tb_User ";
     query += "WHERE username = '" + username + "' ";
     query += "AND password = '" + password + "' ";
     query += "LIMIT 1;";
@@ -22,4 +22,3 @@ function UserRepository() {
 };
 
 module.exports = new UserRepository();
-
