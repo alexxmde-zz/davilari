@@ -1,2 +1,3 @@
 node_modules
 resources/img/products
+models/data/mysql/credentials.json

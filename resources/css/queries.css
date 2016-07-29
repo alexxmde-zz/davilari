@@ -1,4 +1,35 @@
 @media only screen and (min-width : 280px) {
+  #quantity-field{
+    width:60px;
+    font-size:18px;
+    text-align:center;
+  }
+  #orcamento-modal {
+  }
+  /* PRODUCT VIEW */
+  .product-description-xs h1{
+    text-decoration:underline;
+    margin-bottom:30px;
+  }
+
+  .product-description-xs p {
+    font-size:16px;
+    color:grey;
+    padding-left:10px;
+    padding-right:5px;
+  }
+
+  .price-xs {
+    margin-top:50px;
+  }
+
+  .add-xs {
+    margin-top:20px;
+    margin-bottom:40px;
+    font-size:24px;
+    font-weight:bold;
+    height:60px;
+  }
 .container-fluid{
 }
 .logo-header {
@@ -267,6 +298,49 @@ padding-left: 15px;
 
 /* Small Devices, Tablets */
 @media only screen and (min-width : 768px) {
+  /* MODAL */
+  #orcamento-modal {
+  }
+  /* PAINEL DE IMAGENS DO PRODUTO */
+  #panel-images {
+    height:465px;
+    overflow:hidden;
+  }
+
+  #c-main-image {
+    border:1px solid black;
+  }
+  #c-main-image img {
+    height:460px;
+  }
+
+  .panel-image {
+    margin-bottom:10px;
+    border:1px solid black;
+    height:108px;
+  }
+  .panel-image img {
+    width:100%;
+    height:100%;
+  }
+
+
+  .c-description{
+    margin-top:20px;
+  }
+
+  .c-button-orcamento button {
+    width:100%;
+
+  }
+
+  .c-button-orcamento {
+    margin-top:10px;
+  }
+
+  /* MODAL */
+
+
   .logo-header{
     margin-bottom:0
   }
@@ -310,11 +384,71 @@ padding-left: 15px;
 
 /* Medium Devices, Desktops */
 @media only screen and (min-width : 992px) {
+  /* PAINEL DE IMAGENS */
+ #panel-images {
+    height:600px;
+    overflow:hidden;
+  }
 
+  #c-main-image {
+    border:1px solid black;
+  }
+  #c-main-image img {
+    height:555px;
+  }
+
+  .panel-image {
+    margin-bottom:10px;
+    border:1px solid black;
+    height:132px;
+  }
+  .panel-image img {
+    width:100%;
+    height:100%;
+  }
+
+  .c-product-info {
+
+
+  }
 }
 
 /* Large Devices, Wide Screens */
 @media only screen and (min-width : 1200px) {
+  .c-product{
+    margin-top:10px;
+  }
+  /* BUTTON ORCAMENTO */
+  .c-button-orcamento {
+    position:absolute;
+    top:510px;
+  }
+
+  .c-button-orcamento button {
+    height:50px;
+    width:100%;
+    font-size:24px;
+    font-weight:bolder;
+  }
+
+  .p-title{
+    text-decoration:underline;
+    
+  }
+
+  .c-price {
+    position:absolute;
+    top:400px;
+  }
+
+  .c-description{
+    margin-top: 30px;
+    color: #777676;
+    font-size: 18px;
+    letter-spacing: 0.7px;
+    padding-bottom: 40px;
+
+  }
   .r-promo{
   }
   .c-promo-image {
@@ -341,7 +475,18 @@ padding-left: 15px;
 
 
 
+/* EXTRA LARGE */
+@media only screen and (min-width : 1600px) {
+  .img-product {
+    height:400px;
+  }
 
+  .col-xl-offset-3 {
+    margin-left:25%;
+  }
+  
+
+}
 
 
 

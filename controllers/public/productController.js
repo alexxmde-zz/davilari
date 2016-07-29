@@ -2,7 +2,7 @@ var productDAO = require('../../models/data/mysql/productDAO');
 
 categoryDAO= require('../../models/data/mysql/categoryDAO');
 function ProductController () {
-  
+
 
   this.get = function (req, res) {
     var categoryToFind = req.param('categoria');
@@ -10,7 +10,7 @@ function ProductController () {
 
     console.log("\n\nFinding all categories");
     categoryDAO.findAll(function(err, cats) {
-    
+
       if (categoryToFind) {
         console.log("Querying category with " +categoryToFind);
         categoryDAO.findByName(categoryToFind, function(err, cat) {
@@ -24,7 +24,7 @@ function ProductController () {
 
             res.render('public/pages/products', {'ambiente' : isAmbiente, products : prods, categories : cats, queryCategory: categoryToFind});
 
-          }, 
+          },
           function reject(err){
             res.render('public/pages/error', {error: err});
           });
@@ -53,6 +53,7 @@ function ProductController () {
     isAmbiente = true;
 
     console.log("\n\nQuerying for all categories");
+    console.log("\n\nQuerying for all categories");
     categoryDAO.findAll(function(err, cats) {
       if (categoryToFind) {
         console.log("Querying for category " + categoryToFind);
@@ -73,7 +74,7 @@ function ProductController () {
               return res.status(500).render(err);
             });
           }
-        
+
                });
 
       } else {
@@ -98,7 +99,7 @@ function ProductController () {
     productDAO.findOne(req.params.id, function (err, prod) {
     return res.render('public/pages/products/product', {'product' : prod});
     });
-    
+
   };
 }
 

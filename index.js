@@ -1,3 +1,5 @@
+process.env.dbenvironment = "development";
+
 var express = require('express'),
     bodyParser = require('body-parser'),
     cookieParser = require('cookie-parser'),
@@ -6,6 +8,8 @@ var express = require('express'),
         publicRouter = require('./routes/public'),
     // apiRouter = require('./routes/api'),
     sessionCheck = require('./middlewares/session');
+
+
 
 
 app = express(),
@@ -22,7 +26,7 @@ app.use(session({secret: 'donniebrasco'}));
 app.set('view engine', 'ejs');
 app.use('/resources', express.static('resources'));
 //app.use('/', express.static('client'));
-app.use('/admin',  adminRouter);
+app.use('/admin', sessionCheck,  adminRouter);
 //app.use('/api', apiRouter);
 
 app.use(publicRouter);
@@ -39,5 +43,3 @@ app.listen(port, ip, function(err) {
 
   console.log("Server started at: " + ip + " , port: " + port);
 });
-
-

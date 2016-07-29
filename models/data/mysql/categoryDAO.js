@@ -30,7 +30,7 @@ function categoryDAO() {
   };
 
   this.findAll = function(cb) {
-    debugger;
+
     var query = "SELECT * FROM Tb_Category;";
 
     var categories = [];

@@ -1,7 +1,7 @@
 function Session() {
 
   var verifySession = function (req) {
-    if (req.session.isLogged) {
+    if (req.session.isLogged || process.env.dbenvironment == "development") {
       return true;
     } else {
       return false;
@@ -10,9 +10,9 @@ function Session() {
 
   this.execute = function (req, res, next) {
     console.log(req.url);
-    if(req.url == '/login') 
+    if(req.url == '/login')
       return next();
-    
+
     if (verifySession(req)) {
      return  next();
     }
