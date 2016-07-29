@@ -1,5 +1,5 @@
 var userDAO = require('../../models/data/mysql/userDAO');
-
+var productController = require("./productController");
 function loginController () {
 
   var VerifyUser = function (err, user, req, res) {
@@ -36,7 +36,7 @@ function loginController () {
     var user = req.body;
     userDAO.FindByNameAndPassword(user.username, user.password, function(err, user) {
       VerifyUser(err, user, req, res);
-    }); 
+    });
   };
 
 

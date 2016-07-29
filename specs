@@ -1,36 +1,7 @@
-Public
-  FrontEnd
-    Layout Paginas
-      Layout - 6 hrs
-      Home - 10 hrs
-      Produtos - 6 hrs
-      Ambientes - 6 hrs
-      Localizacao - 8 hrs
-      Acabamentos - 8 hrs
-      
-  BackEnd
-    Produtos - 8 hrs
-    Ambientes - 8 hrs
-    Acabamentos - 8 hrs
-    
+MySQL 5.5 database added.  Please make note of these credentials:
 
-Admin
-  FrontEnd
-    Layout
-     Login - 2 hrs
-      Layout - 3 hrs
-      Produtos - 4 hrs
-      Ambientes - 4 hrs
-      Acabamentos - 4 hrs
-    JS
-      Login - 1 hr
-      Produtos - 8 hrs
-      Ambientes - 8 hrs
-      Acabamentos - 8 hrs
-    
+       Root User: adminasIMaXQ
+   Root Password: ANGuMK9YvD4D
+   Database Name: nodejs
 
-  BackEnd
-  Login - 10 hrs
-  Produtos - 8 hrs
-  Ambientes - 8 hrs
-  Acabamentos - 8 hrs
+Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/
