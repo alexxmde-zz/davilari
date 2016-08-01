@@ -121,9 +121,11 @@
         <input type="text" name="quantity" id="quantity-field" value="1" size="2" maxlength="2"></input>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" data-id="<%= product.IdProduct %>" 
-          data-name="<%= product.name %>" id="btn-post-item" data-dismiss="modal"  class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
+
+        <button id="btn-post-item" type="button" data-id="<%= product.IdProduct %>" 
+                              data-name="<%= product.name %>" data-price="<%= product.price %>"  data-dismiss="modal" 
+                              class="btn btn-primary">Adicionar</button>
       </div>
     </div>
   </div>

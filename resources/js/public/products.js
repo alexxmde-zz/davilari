@@ -28,14 +28,28 @@ jQuery.fn.ForceNumericOnly =
 
 
               function CartEvents () {
+                var buildCartItemData = function (e) {
+                  try {
+                  var objCartItem = {};
+                  objCartItem.id = $(e.target).data("id");
+                  objCartItem.name = $(e.target).data("name");
+                  objCartItem.price = $(e.target).data("price");
+                  objCartItem.quantity= $("#quantity-field").val();
+
+                  return objCartItem;
+                  } catch (err) {
+                    console.log(err.message);
+                  }
+
+                };
 
                 $("#quantity-field").ForceNumericOnly();
 
                 $("#btn-post-item").on('click', function (e) {
                   $.ajax({
                     method: "POST",
-                    url: "/cart",
-                    data: {"IdProduct" : "1", "Quantity" : 1},
+                    url: "/cart/item",
+                    data: buildCartItemData(e)
                     
                   })
                   .done(function (msg) {

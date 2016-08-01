@@ -1,0 +1,198 @@
+<html>
+
+  <head>
+    <title>Davilari - Moveis</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="resources/vendor/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="resources/css/queries.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+  </head>
+
+  <body>
+    <div class="container-fluid">
+      <div class="row" style="display:none">
+        <header class="header">
+          <div class="header-top col-sm-12 col-md-12 col-xs-12 no-padding">
+            <div class="no-padding col-sm-3 col-xs-12">
+              <a href="/">
+                <img class="logo-header img img-responsive" src="resources/img/logo-new.jpg" />
+              </a>
+            </div>
+
+            <div class="header-categories col-sm-4 col-md-4 col-xs-12">
+              <div class="header-category text-center col-lg-6 col-sm-12 col-xs-12">
+                <span>Móveis em Aumínio</span>
+              </div>
+              <div class="header-category text-center col-lg-6 col-sm-12 col-xs-12">
+                <span>Móveis para Piscina</span>
+              </div>
+              <div class="header-category varanda-container col-xs-12 col-sm-12 text-center">
+                <span>Móveis para Varanda</span>
+              </div>
+              <div class="header-category col-xs-12 col-sm-6 text-center">
+                <span>Móveis para Varanda</span>
+              </div>
+
+              <div class="header-category col-xs-12 col-sm-6 text-center">
+                <span>Móveis para Varanda</span>
+              </div>
+
+            </div>
+            <div class="hidden-xs col-sm-5 c-info text-right">
+              <div class="c-cidade col-xs-12">
+                <span>Vargem Grande Paulista</span>
+              </div>
+              <div class="c-fixo col-xs-12">
+                <span> (11) 4559-1159 </span>
+              </div>
+              <div class="c-whatsapp col-xs-12">
+                <span>Whatsapp: (11) 97595-1164 </span>
+              </div>
+
+            </div>
+            <nav class="text-center nav-container navbar navbar-default col-xs-12">
+
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#myNav" aria-expanded="false">
+                  <span class="sr-only">Toggle navigation</span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand visible-xs" href="#">Davilari</a>
+              </div>
+
+              <div class="col-sm-12 col-xl-offset-3  col-lg-offset-2 collapse navbar-collapse" id="myNav">
+                <ul class="nav navbar-nav col-sm-offset- col-xs-12">
+                  <li><a href="/produtos">Produtos</a></li>
+                  <li><a href="/ambientes">Ambientes</a></li>
+                  <li><a href="#">Acabamentos</a></li>
+                  <li><a href="/cart">Orçamento</a></li>
+                  <li><a href="#">Localização</a></li>
+                </ul>
+              </div>
+
+            </nav>
+          </div>
+        </header>
+      </div>
+      <!-- REMOVE -->
+
+      <div class="container">
+        <div class="row">
+          <div class="col-xs-12 text-center">
+            <h1>Envio de Orçamento</h1>
+          </div>
+        </div>
+
+        <!-- Campos -->
+
+        <form class="form">
+          <div class="row form-cart-row">
+            <div class="col-xs-12">
+              <fieldset class="form-group">
+                <label>Seu nome</label>
+                <input type="text" class="form-control" name="name" id="name-input" placeholder="Seu Nome" />
+                <p class="hidden" id="name-validation">Campo obrigatório!</p>
+              </fieldset>
+              <fieldset class="form-group">
+                <label>Email</label>
+                <input type="text" class="form-control" name="email" id="email-input" placeholder="Email" />
+                <p class="hidden" id="email-validation">Campo obrigatório!</p>
+              </fieldset>
+              <fieldset class="form-group">
+                <label>Mensagem (Opcional)</label>
+                <textarea type="text" class="form-control" name="message" id="message-input" placeholder="Escreva aqui detalhes adicionais sobre o orçamento"></textarea>
+              </fieldset>
+              <fieldset class="form-group">
+                <label>Telefone para contato</label>
+                <input type="text" class="form-control" name="phone" id="phone-input" placeholder="Telefone" />
+                <p class="hidden" id="phone-validation">Campo obrigatório!</p>
+              </fieldset>
+              <fieldset class="form-group">
+                <label>Celular</label>
+                <input type="text" class="form-control" name="cellphone" id="cellphone-input" placeholder="Celular" />
+                <p class="hidden" id="cellphone-validation">Campo obrigatório!</p>
+              </fieldset>
+        </form>
+        </div>
+        </div>
+        <!-- Tabela -->
+        <div class="row table-responsive">
+          <table class="table table-striped" id="items-table">
+            <thead>
+              <tr>
+                <th>Produto</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th>Total</th>
+                <th>Opções</th>
+              </tr>
+            </thead>
+            <tfoot>
+              <tr>
+                <td colspan="5">
+
+                </td>
+              </tr>
+            </tfoot>
+            <tbody>
+              <tr>
+                <td> Chaise Sling</td>
+                <td>
+                  2
+                </td>
+                <td> R$1300,00</td>
+                <td> R$2600,00</td>
+                <td class="text-center">
+                  <button type="button" data-item-id="1" class="btn remove-item">
+                    <span class="remove-item-icon glyphicon glyphicon-remove"></span></button>
+                </td>
+              </tr>
+              <tr>
+                <td> Chaise Sling</td>
+                <td>
+                  2
+                </td>
+                <td> R$1300,00</td>
+                <td> R$2600,00</td>
+                <td class="text-center">
+                  <button type="button" data-item-id="2" class="btn remove-item">
+                    <span class="remove-item-icon glyphicon glyphicon-remove"></span></button>
+                </td>
+              </tr>
+            </tbody>
+            <p id="table-validation"></p>
+
+          </table>
+        </div>
+
+        <div class="row">
+          <div class="col-xs-12 text-center">
+
+            <button type="button" class="hidden form-control btn btn-primary" id="btn-sent">
+              Orçamento Enviado!
+            </button>
+            <button id="btn-send-cart" type="button" class="form-control btn btn-primary">
+              Enviar
+            </button>
+            <button id="btn-back-cart" type="button" class="form-control btn btn-danger">
+              Voltar
+            </button>
+            <p id="cart-validation"></p>
+          </div>
+        </div>
+      </div>
+      <!-- Buttons -->
+
+
+      <!-- REMOVE -->
+    </div>
+  </body>
+
+  <script src="resources/vendor/jquery/jquery-2.2.4.min.js"></script>
+  <script src="resources/vendor/bootstrap/js/bootstrap.min.js"></script>
+  <script src="resources/js/public/cart.js"></script>
+
+
+</html>

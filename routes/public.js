@@ -11,8 +11,10 @@ router.get('/produtos', productController.get);
 router.get('/ambientes', productController.getAmbientes);
 router.get('/produto/:id', productController.getProduct);
 
-router.post('/cart', cartController.post);
-router.get('/cart', cartController.get);
+router.post('/cart/item', cartController.postItem);
+router.post('/cart', cartController.postCart);
+router.delete('/cart/item/:id', cartController.deleteItem);
+router.get('/cart', cartController.getCart);
 
 
 module.exports = router;

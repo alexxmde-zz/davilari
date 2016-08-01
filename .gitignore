@@ -1,3 +1,4 @@
 node_modules
 resources/img/products
 models/data/mysql/credentials.json
+utils/email.json
