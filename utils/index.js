@@ -28,6 +28,7 @@ function Utils() {
 
       transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
+          console.error(error);
           return reject (error);
         } else {
           return resolve (error);
