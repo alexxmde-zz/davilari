@@ -108,6 +108,7 @@ function CartController () {
     utils.sendMail(buildHtml(data)).then(function success() {
       return res.status(200).send("OK");
     }, function failure(error) {
+      console.error(error);
       return res.status(500).send(error);
     });
 

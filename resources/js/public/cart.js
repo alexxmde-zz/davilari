@@ -91,8 +91,9 @@ function validateForm () {
           $("#btn-sent").removeClass("hidden");
 
 
-        }).fail(function (xhr) {
+        }).fail(function (xhr, message) {
           console.log(xhr.statusText);
+          console.log(message);
           $("#cart-validation").text("Algo deu errado. Contato o administrador através do e-mail alexandre@davilari.com.br");
 
 
