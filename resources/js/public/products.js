@@ -37,7 +37,6 @@ jQuery.fn.ForceNumericOnly =
                   } catch (err) {
                     console.log(err.message);
                   }
-
                 };
 
                 $("#quantity-field").ForceNumericOnly();
