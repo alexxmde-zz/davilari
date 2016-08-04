@@ -1,6 +1,34 @@
 @media only screen and (min-width : 280px) {
-  /* ORCAMENTO */
+  /* MAP */
+  #mapHere {
+    height:350px;
+  }
+  /* FOOTER */
+  .footer-container {
+    background-color:rgb(50, 51, 52);
+    color:white;
+    padding-right:0;
+    height:355px;
 
+  }
+  .main-footer {
+    margin-top:100px;
+
+  }
+
+  .alex-box{
+    padding-left:20px;
+    font-size:16px;
+
+  }
+
+  .davilari-box {
+    padding-left:20px;
+    font-size:16px;
+
+  }
+
+  /* ORCAMENTO */
 #btn-send-cart {
   height: 50px;
   font-size:28px;
@@ -20,7 +48,7 @@
 #btn-send-cart-status {
   height:50px;
   font-size:28px;
-  
+
 
 }
 

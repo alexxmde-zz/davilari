@@ -33,7 +33,7 @@ var buildHtml = function (data) {
     "       </fieldset>" + 
 
     "      <fieldset>" + 
-    "       Email: <b>+" + sender.email + "/b>" + 
+    "       Email: <b>" + sender.email + "</b>" + 
 
     "       </fieldset>" + 
 

@@ -8,7 +8,7 @@ var buildMailOptions = function () {
 
 };
 var mailOptions = buildMailOptions();
-var transporter = nodemailer.createTransport("smtps://" + mailOptions.user + ":" + mailOptions.password + "@smtp.gmail.com");
+var transporter = nodemailer.createTransport("smtps://" + mailOptions.user + ":" + mailOptions.password + "@" + mailOptions.smtp);
 
 
 
