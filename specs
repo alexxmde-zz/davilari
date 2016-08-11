@@ -1,7 +1,0 @@
-MySQL 5.5 database added.  Please make note of these credentials:
-
-       Root User: adminasIMaXQ
-   Root Password: ANGuMK9YvD4D
-   Database Name: nodejs
-
-Connection URL: mysql://$OPENSHIFT_MYSQL_DB_HOST:$OPENSHIFT_MYSQL_DB_PORT/

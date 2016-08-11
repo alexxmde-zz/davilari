@@ -16,13 +16,17 @@ switch (process.env.dbenvironment) {
   ).test;
   break;
 
+  case "production":
+    var credentials = JSON.parse(fs.readFileSync(__dirname + "/credentials.json", "utf-8"))
+    .production;
+
 }
 
 
 
 var connection = mysql.createConnection({
-  host: process.env.OPENSHIFT_MYSQL_DB || 'localhost',
-  port: process.env.OPENSHIFT_MYSQL_DB_PORT || '3306',
+  host: process.env.OPENSHIFT_MYSQL_DB || credentials.url,
+  port: process.env.OPENSHIFT_MYSQL_DB_PORT || credentials.port,
   user: credentials.user,
   password : credentials.password,
   database : credentials.database
