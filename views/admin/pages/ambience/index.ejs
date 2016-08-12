@@ -1,0 +1,49 @@
+<% include ../../templates/header %>
+<div class="container">
+  <div class="row">
+    <header class="product-header col-xs-6">
+      <h1>Ambientes</h1>
+    </header>
+
+      <section class="col-sm-6 col-xs-12">
+        
+      <form action="/admin/ambientes" method="GET">
+     <span class="glyphicon glyphicon-search"></span>
+      <input type="text" id="search" name="search" />
+      <input type="submit" class="btn btn-default" id="search-button" type="button"
+                                                                      value="Ok" />
+      </form>
+    </section>
+
+    <article>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Ambiente</th>
+            <th>Descrição</th>
+            <th>Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% ambiences.forEach(function(amb) { %>
+          <tr>
+            <td> <%= amb.name %> </td>
+            <td> <%= amb.description %> </td>
+            <td>
+              <a href="/admin/ambiente/<%= amb.IdAmbience%>">
+                <button class="btn btn-default">
+                  <span class="glyphicon glyphicon-edit"></span>
+                </button>
+          </tr>
+          <% }); %>
+        </tbody>
+      </table>
+    </article>
+
+    <footer>
+      <a href="/admin/ambiente"><button class="btn btn-default">Novo</button>
+    </footer>
+  </div>
+</div>
+
+

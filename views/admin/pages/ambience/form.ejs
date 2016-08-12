@@ -1,0 +1,113 @@
+<% include   ../../templates/header.ejs %>
+<input type="hidden" value="<%= ambience.IdAmbience %>" id="_id"/>
+<div class="container">
+  <div class="row">
+    <h1><%= ambience.name || "Novo Ambiente"%></h1>
+
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2 procut-form">
+      <form id="ambience-form" enctype="multipar/form-data" action="/admin/ambiente" method="POST">
+        <fieldset class="form-group">
+          <label for"name">Nome</label>
+          <input class="form-control" value="<%= ambience.name %>" type="text" name="name" id="name" placeholder="Titulo do Produto"/>
+          <p class="validation" id="name-validation"></p>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <label for"Descricao">Descrição</label>
+          <textarea class="form-control"type="textarea" name="description" id="description" 
+                                                                           placeholder="Descricao"><%= ambience.description %></textarea>
+          <p  class="validation" id="description-validation"></p>
+        </fieldset>
+
+       
+        <% if (ambience.images) { %>
+        <fieldset class="form-group">
+          <h2>Imagens</h2>
+          <div class="row">
+            <ul class="form-images col-xs-12">
+              <% ambience.images.map(function(img) { %>
+              <li class="col-sm-6"> 
+                <div class="col-xs-12 col-sm-12 img-container">
+                  <img
+                     data-image="<%= img %>"
+                     data-toggle="modal"
+                     data-target="#AmbienceImageModal"
+                     class="form-ambience-image" data-name="<%= img %>"  src="/resources/img/ambiences/<%= img %>"/>
+                </div>
+              </li>
+
+              <%}); %>
+            </ul>
+          </div>
+
+        </fieldset>
+
+        <% } %>
+
+
+        <fieldset class="form-group">
+          <label>Adicionar Imagens</label>
+          <input class="form-control" type="file" multiple  id="images" name="images"/>
+          <p class="validation" id="images-validation"></p>
+        </fieldset>
+        <% if (ambience.mainImage) { %>
+        <h2>Imagem Principal </h2>
+        <img data-image="<%= ambience.mainImage %>" id="mainImage" class="img img-responsive img-main"
+             src="/resources/img/ambiences/<%= ambience.mainImage %>" />
+             <% } %>
+
+             <fieldset class="form-group">
+               <label>Adicionar Imagem Principal</label>
+               <input class="form-control" type="file" id="mainImage" name="mainImage"/>
+               <p class="validation" id="mainImage-validation"></p>
+             </fieldset>
+
+             <fieldset class="form-group">
+               <label>Destaque</label>
+               <input class="form-control" type="checkbox" 
+               <% if (ambience.featured) { %>
+               checked
+               <% } %>
+
+               id="featured" name="featured"/>
+             </fieldset>
+
+
+
+
+             <fieldset class="form-group">
+               <button class="form-control btn btn-success">Salvar</button>
+             </fieldset>
+      </form>
+      <a href="/admin/ambientes">
+        <button class="form-control btn btn-default">
+          Voltar
+        </button>
+      </a>
+
+      <p id="error-message"></p>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="AmbienceImageModal">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">
+        <span>&times</span></button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-xs-12">
+          <img src="" class="ambience-img-modal"/>
+        </div>
+      </div>
+
+      <button data-dismiss="modal" type="button" class="btn btn-danger delete-button">Excluir</button>
+    </div>
+  </div>
+</div>
+
+
+<% include ../../templates/footer.ejs %>
+

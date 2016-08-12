@@ -35,9 +35,28 @@
   padding:0;
   padding-bottom:10px;
 }
+.form-ambience-image {
+  width:100%;
+  height:100%;
+}
+
+.form-ambience > li {
+  height:300px;
+  list-style:none;
+  margin-top:15px;
+}
+
+.form-ambience-images {
+  background-color:#c3c3c3;
+  padding:0;
+  padding-bottom:10px;
+}
 
 
 .img-modal{
+  width:100%;
+}
+.ambience-img-modal {
   width:100%;
 }
 
