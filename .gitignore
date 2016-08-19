@@ -1,6 +1,8 @@
 node_modules
 resources/img/products
 resources/img/ambiences
+resources/img/sales
+resources/img/acabamentos
 models/data/mysql/credentials.json
 utils/email.json
 client/
