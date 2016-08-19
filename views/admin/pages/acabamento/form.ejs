@@ -1,0 +1,94 @@
+<% include   ../../templates/header.ejs %>
+<input type="hidden" value="<%= acabamento.IdAcabamento %>" id="_id"/>
+<div class="container">
+  <div class="row">
+    <h1><%= acabamento.name || "Novo Acabamento "%></h1>
+
+    <div class="col-xs-12 col-sm-8 col-sm-offset-2 acabamentos-form">
+      <form action="/admin/acabamentos/novo" id="acabamento-form" method="POST" enctype="multipart/form-data">
+
+        <fieldset class="form-group">
+          <label for="tipo">Tipo de Acabamento</label>
+          <select class="form-control" name="IdTipoAcabamento">
+
+            <option value="0">-- Selecione o tipo do Acabamento --</option>
+            <% if (tipos) {
+                  tipos.forEach(function(t) { %>
+                  <option
+                  <% if (t.IdTipoAcabamento == acabamento.IdTipoAcabamento) { %>
+                  selected
+                  <% } %>
+                  value="<%= t.IdTipoAcabamento %>">
+                  <%= t.nome %>
+                  </option>
+            <% }); } %>
+          </select>
+          <p id="tipoAcabamento-validation"></p>
+        </fieldset>
+
+        <fieldset class="form-group">
+          <label for"name">Nome</label>
+          <input maxlength="25" class="form-control" value="<%= acabamento.nome %>" type="text" name="nome" id="acabamento-nome"
+          placeholder="Titulo do Acabamento"/>
+          <p class="validation" id="nome-validation"></p>
+        </fieldset>
+
+        <!-- ACTIVE -->
+        <fieldset class="form-group">
+          <label for"name">Disponivel</label>
+          <input type="checkbox"
+          <% if (acabamento.disponivel) { %>
+          checked
+          <% } %>
+          name="disponivel" id="disponivel" />
+          <p class="validation" id="disponivel-validation"></p>
+        </fieldset>
+
+        <!-- IMAGE -->
+        <fieldset class="form-group">
+          <label>Imagem </label>
+          <input class="" type="file" id="acabamento-imagem" name="imagem"/>
+          <p class="validation" id="imagem-validation"></p>
+        </fieldset>
+        <% if (acabamento.imagem) { %>
+        <fieldset class="form-group">
+          <img class="img img-responsive" id="imagem-acabamento" src="/resources/img/acabamentos/<%= acabamento.imagem %>" />
+        </fieldset>
+        <% } %>
+
+
+
+        <fieldset class="form-group">
+          <button class="form-control btn btn-success">Salvar</button>
+        </fieldset>
+      </form>
+      <a href="/admin/acabamentos">
+        <button class="form-control btn btn-default">
+          Voltar
+        </button>
+      </a>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="imageModal">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">
+        <span>&times</span></button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-xs-12">
+          <img src="" class="img-modal"/>
+        </div>
+      </div>
+
+      <button data-dismiss="modal" type="button" class="btn btn-danger delete-button">Excluir</button>
+    </div>
+  </div>
+</div>
+
+
+
+<% include ../../templates/footer.ejs %>

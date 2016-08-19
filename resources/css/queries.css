@@ -1,4 +1,11 @@
 @media only screen and (min-width : 280px) {
+  .r-destaques {
+    margin-top:20px;
+    letter-spacing:2px;
+  }
+  .destaque-container{
+    margin-top:20px;
+  }
   /* CONTATO */
   
   .contato-title{ 
@@ -319,6 +326,7 @@ a{
 
 
 .r-promo{
+  height:700px;
 
 }
 

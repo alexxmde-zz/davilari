@@ -1,0 +1,48 @@
+<% include ../../templates/header.ejs %>
+<div class="container">
+
+  <h1 class="text-center">Acabamentos</h1>
+  <div class="row">
+    <div class="col-xs-12">
+
+      <!-- Tabela de Acabamentos -->
+
+      <table class="table table-responsive table-striped">
+        <thead>
+          <tr>
+            <th>Tipo</th>
+            <th>Nome</th>
+            <th>Imagem</th>
+            <th>Editar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% if (acabamentos) {
+            acabamentos.forEach(function(a) {
+          %>
+          <tr>
+            <td><%= a.nomeTipo %></td>
+            <td><%= a.nome %></td>
+            <td><img src="/resources/img/acabamentos/<%= a.imagem %>" class="acabamento-thumb" /></td>
+            <td><a href="/admin/acabamento/<%= a.IdAcabamento %>">
+                <button class="btn btn-default"><span class="glyphicon glyphicon-edit"></span></button>
+              </a></td>
+          </tr>
+          <% }); 
+            } %>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Controles -->
+
+    <div class="col-xs-12">
+      <a href="/admin/acabamento">
+        <button class="btn btn-primary">Adicionar</button>
+      </a>
+    </div>
+  </div>
+
+</div>
+
+<% include ../../templates/footer.ejs %>

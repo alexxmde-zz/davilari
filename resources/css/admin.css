@@ -1,5 +1,12 @@
 @charset="UTF-8";
 
+.table-product-img {
+  width:100px;
+}
+.acabamento-thumb {
+  width:100px;
+  height:30px;
+}
 .login-box {
   width:300px;
   height:300px;

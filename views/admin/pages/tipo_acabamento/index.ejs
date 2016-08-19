@@ -1,0 +1,73 @@
+<% include ../../templates/header.ejs %>
+<div class="container">
+
+  <h1 class="text-center">Acabamentos</h1>
+  <div class="row">
+    <div class="col-xs-12">
+
+      <!-- Tabela de Acabamentos -->
+      <table class="table table-responsive table-striped">
+        <thead>
+          <tr>
+            <th>Titulo do Tipo</th>
+            <th>Alterar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% 
+             if (tipos) {
+          tipos.forEach(function (tipo) { %>
+          <tr>
+            <td><%= tipo.nome %></td>
+            <td>
+              <button
+             data-toggle="modal" 
+             data-target="#TipoAcabamentoModal"
+             data-id="<%= tipo.IdTipoAcabamento %>"
+             data-tipoAcabamento="<%= tipo.nome %>" class="btn btn-delete-tipo">
+             <span class="glyphicon glyphicon-edit"></span>
+              </button>
+            </td>
+          </tr>
+
+          <%  }); }%>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Controles -->
+
+    <div class="col-xs-12">
+      <button data-toggle="modal" data-target="#TipoAcabamentoModal" class="btn btn-primary">Adicionar</button>
+    </div>
+  </div>
+
+</div>
+
+<div class="modal fade" id="TipoAcabamentoModal">
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <button type="button" class="close" data-dismiss="modal">
+        <span>&times</span></button>
+    </div>
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-xs-12">
+          <fieldset class="form-group">
+            <input type="text" id="input-tipoAcabamento" maxlength="30" class="form-control" placeholder="Digite o nome do tipo de acabamento">
+            </input>
+            <p id="validate-tipoAcabamento"></p>
+          </fieldset>
+        </div>
+      </div>
+
+      <button type="button" id="btn-tipoAcabamento" class="btn btn-primary inserir-tipoAcabamento">Salvar</button>
+      <button type="button" id="btn-tipoAcabamento-success" class="hidden btn btn-success inserir-tipoAcabamento-success">
+        Acabamento inserido!</button>
+      <p id="message-tipoAcabamento"></p>
+      <input id="idTipoAcabamento" type="hidden" value="" />
+    </div>
+  </div>
+</div>
+
+<% include ../../templates/footer.ejs %>

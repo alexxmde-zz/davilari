@@ -28,9 +28,11 @@
         <tbody>
           <% products.forEach(function(prod) { %>
           <tr>
+            <td><img class="table-product-img" src="/resources/img/products/<%= prod.mainImage %>" /></td>
             <td> <%= prod.name %> </td>
-            <td> <%= prod.description %> </td>
+            <td> <%= prod.description.substring(0,100) + '...' %> </td>
             <td> <%= prod.price %> </td>
+
             <td>
               <a href="/admin/produto/<%= prod.IdProduct %>">
                 <button class="btn btn-default">

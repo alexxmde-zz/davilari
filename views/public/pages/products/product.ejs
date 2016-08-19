@@ -98,7 +98,8 @@
           </div>
  <div class="text-center col-sm-12 c-button-orcamento">
 
-   <button data-target="#orcamento-modal" data-toggle="modal" id="add-orcamento" data-IdProduct="<%= product.IdProduct %>" class="btn btn-success">Adicionar ao Orçamento</button>
+   <button data-target="#orcamento-modal" data-toggle="modal" id="add-orcamento" data-IdProduct="<%= product.IdProduct %>" class="btn btn-success">
+     Adicionar ao Orçamento <span class="glyphicon glyphicon-shopping-cart"></button>
         </div>
         </div>
       </div>
@@ -124,8 +125,15 @@
         <button type="button" class="btn btn-default" data-dismiss="modal">Cancelar</button>
 
         <button id="btn-post-item" type="button" data-id="<%= product.IdProduct %>" 
-                              data-name="<%= product.name %>" data-price="<%= product.price %>"  data-dismiss="modal" 
+                              data-name="<%= product.name %>" data-price="<%= product.price %>"   
                               class="btn btn-primary">Adicionar</button>
+        <button id="btn-posted-item" type="button" class="hidden btn btn-success">
+          Produto adicionado ao orçamento!
+        </button>
+        <a class="hidden" id="linkParaOrcamento" href="/orcamento">Ir para Envio de Orçamento</a>
+        <div>
+          <a class="hidden" id="linkParaProdutos" href="/produtos">Ver mais produtos</a>
+        </div>
       </div>
     </div>
   </div>

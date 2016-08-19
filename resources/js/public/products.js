@@ -42,6 +42,7 @@ jQuery.fn.ForceNumericOnly =
                 $("#quantity-field").ForceNumericOnly();
 
                 $("#btn-post-item").on('click', function (e) {
+                  $("#btn-post-item").text("Adicionando...");
                   $.ajax({
                     method: "POST",
                     url: "/cart/item",
@@ -49,7 +50,12 @@ jQuery.fn.ForceNumericOnly =
                     
                   })
                   .done(function (msg) {
-                    console.log(msg);
+                    setInterval(function () {
+                    $("#btn-post-item").addClass("hidden");
+                    $("#btn-posted-item").removeClass("hidden");
+                    $("#linkParaOrcamento").removeClass("hidden");
+                    $("#linkParaProdutos").removeClass("hidden");
+                    }, 1000);
                   })
                   .fail(function (jqXHR, textStatus) {
                     console.log("Request failed: " + jqXHR.responseText);

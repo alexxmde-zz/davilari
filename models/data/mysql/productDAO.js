@@ -62,14 +62,14 @@ function productDAO() {
 
 
     console.log(product);
-    product.ambiente = utils.parseBin(product.ambiente);
+    product.destaque = utils.parseBin(product.destaque);
     var query = "UPDATE Tb_Product SET ";
     query += "name = '" + product.name + "', ";
     query += "description = '" + product.description + "', ";
     if (product.mainImage)
     query += "mainImage = '" + product.mainImage + "', ";
 
-    query += "ambiente = " + product.ambiente + ", ";
+    query += "destaque = " + product.destaque + ", ";
     query += "price = " + product.price;
     query += " WHERE IdProduct = " + product.IdProduct;
 
@@ -128,15 +128,15 @@ function productDAO() {
   };
 
   this.insert = function(product, cb) {
-    product.ambiente = utils.parseBin(product.ambiente);
+    product.destaque = utils.parseBin(product.destaque);
 
     console.log(product);
 
-    var query = "INSERT INTO Tb_Product (name, description, price, ambiente, mainImage) ";
+    var query = "INSERT INTO Tb_Product (name, description, price, destaque, mainImage) ";
     query += "VALUES ('" + product.name + "', ";
     query += "'" + product.description + "', ";
     query += product.price + ", ";
-    query += product.ambiente + ", ";
+    query += product.destaque + ", ";
     query += "'" + product.mainImage + "'";
     query += "); \n";
     console.log(query);
@@ -172,8 +172,20 @@ function productDAO() {
 
   };
 
+  this.buscarDestaques = function (cb) {
+    var query = "SELECT * FROM Tb_Product WHERE destaque = 1";
+
+    mysql.query(query, function (err, rows) {
+      if (err) {
+        cb (err, null);
+      } else {
+        cb(null, rows);
+      }
+    });
+  };
+
   this.findAll = function (cb) {
-    var query = "SELECT * FROM Tb_Product";
+    var query = "SELECT * FROM Tb_Product JOIN Tb_Product_Category USING (IdProduct) ORDER BY IdCategory";
 
     mysql.query(query, function (err, rows) {
       if (err) return cb(err);
@@ -184,7 +196,7 @@ function productDAO() {
   };
 
   this.findAllProducts = function (cb){
-    var query = "SELECT * FROM Tb_Product WHERE ambiente = 0";
+    var query = "SELECT * FROM Tb_Product";
 
     mysql.query(query, function (err, rows) {
       if (err) return cb(err);
@@ -226,7 +238,7 @@ function productDAO() {
         product.description = row.description;
         product.price = row.price;
         product.mainImage = row.mainImage;
-        product.ambiente = row.ambiente;
+        product.destaque = row.destaque;
 
         if (row.path)
         product.images.push(row.path);
@@ -242,7 +254,7 @@ function productDAO() {
 
   this.findAmbientes = function () {
     return new Promise(function (resolve, reject) {
-      var query = "SELECT * FROM Tb_Product WHERE ambiente = 1";
+      var query = "SELECT * FROM Tb_Product WHERE destaque = 1";
       mysql.query(query, function (err, products) {
         if (err) return reject(err);
 
@@ -258,7 +270,7 @@ function productDAO() {
     return new Promise(function (resolve, reject) {
       var query = "SELECT * FROM Tb_Product ";
       query += " JOIN Tb_Product_Category USING(IdProduct) ";
-      query+= "WHERE ambiente = 1 AND IdCategory =  " + IdCategory;
+      query+= "WHERE destaque = 1 AND IdCategory =  " + IdCategory;
 
       mysql.query(query, function (err, products) {
         if (err) return reject(err);
@@ -276,7 +288,7 @@ function productDAO() {
       var query = "SELECT * FROM Tb_Product ";
       query += " JOIN Tb_Product_Category USING (IdProduct) ";
       query += " WHERE IdCategory = " + id + " ";
-      query += "AND ambiente =0";
+      query += "AND destaque =0";
 
       mysql.query(query, function (err, products) {
         if (err) return reject (err);

@@ -7,6 +7,50 @@
         <h1>Envio de Orçamento</h1>
       </div>
     </div>
+    <% if(cart) { %>
+ <div class="row table-responsive">
+      <table class="table table-striped" id="items-table">
+        <thead>
+          <tr>
+            <th>Produto</th>
+            <th>Quantidade</th>
+            <th>Preço</th>
+            <th>Total</th>
+            <th>Opções</th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <td colspan="5">
+
+            </td>
+          </tr>
+        </tfoot>
+        <tbody>
+          <% 
+                var i = 0;
+                cart.items.forEach(function(c) {
+                if (c) { %>
+                <tr>
+                  <td> <%= c.name%></td>
+                  <td><%= c.quantity %></td>
+                  <td> R$<%= c.price %>,00</td>
+                  <td> R$<%= (c.price * c.quantity) %></td>
+                  <td class="text-center">
+                    <button type="button" data-item-id="<%= c.id %>" class="btn remove-item">
+                      <span class="remove-item-icon glyphicon glyphicon-remove"></span></button>
+                  </td>
+                </tr>
+
+                <%
+                            i++;
+                            }
+                            }); %>
+        </tbody>
+        <p id="table-validation"></p>
+
+      </table>
+    </div>
 
     <!-- Campos -->
 
@@ -41,51 +85,7 @@
     </div>
     </div>
     <!-- Tabela -->
-    <div class="row table-responsive">
-      <table class="table table-striped" id="items-table">
-        <thead>
-          <tr>
-            <th>Produto</th>
-            <th>Quantidade</th>
-            <th>Preço</th>
-            <th>Total</th>
-            <th>Opções</th>
-          </tr>
-        </thead>
-        <tfoot>
-          <tr>
-            <td colspan="5">
-
-            </td>
-          </tr>
-        </tfoot>
-        <tbody>
-          <% 
-                if(cart) {
-                var i = 0;
-                cart.items.forEach(function(c) {
-                if (c) { %>
-                <tr>
-                  <td> <%= c.name%></td>
-                  <td><%= c.quantity %></td>
-                  <td> R$<%= c.price %>,00</td>
-                  <td> R$<%= (c.price * c.quantity) %></td>
-                  <td class="text-center">
-                    <button type="button" data-item-id="<%= i %>" class="btn remove-item">
-                      <span class="remove-item-icon glyphicon glyphicon-remove"></span></button>
-                  </td>
-                </tr>
-
-                <%
-                            i++;
-                            }
-                            }); }%>
-        </tbody>
-        <p id="table-validation"></p>
-
-      </table>
-    </div>
-
+   
     <div class="row">
       <div class="col-xs-12 text-center">
 
@@ -103,5 +103,27 @@
         </a>
       </div>
     </div>
+    <% } else { %>
+    <h2>Não há produtos adicionados no orçamento. Veja abaixo nossos destaques:</h2>
+    <div class="row r-destaques">
+      <h1 class="text-center"> Produtos em Destaque </h1>
+      <div class="destaque-container">
+        <% products.forEach(function(prod) { %>
+        <a href="/produto/<%= prod.IdProduct %>">
+          <div class="product col-sm-6 col-md-4">
+            <div class="img-box text-center">
+              <img class="img-product" src="/resources/img/products/<%= prod.mainImage %>" />
+            </div>
+            <div class="info-box col-xs-12">
+              <h2 class="title-product"><%= prod.name %></h2>
+              <h3 class="price-product"><%= "R$"+prod.price+",00" %></h3>
+            </div>
+          </div>
+        </a>
+        <% }); %>
+      </div>
+    </div>
+
+    <% } %>
   </div>
   <% include ../../templates/footer.ejs %>

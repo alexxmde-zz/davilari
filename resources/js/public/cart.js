@@ -69,7 +69,8 @@ function validateForm () {
 
           console.log(xhr.responseText);
       }).success(function(){
-        line.parent().parent().hide();
+        line.parent().parent().remove();
+        window.location.href = '/orcamento';
       });
 
     });

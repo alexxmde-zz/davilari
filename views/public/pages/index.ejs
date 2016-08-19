@@ -55,6 +55,26 @@
 
 </div>
 
+<div class="row r-destaques">
+  <h1 class="text-center"> Produtos em Destaque </h1>
+  <div class="destaque-container">
+      <% products.forEach(function(prod) { %>
+      <a href="/produto/<%= prod.IdProduct %>">
+        <div class="product col-sm-6 col-md-4">
+          <div class="img-box text-center">
+            <img class="img-product" src="/resources/img/products/<%= prod.mainImage %>" />
+          </div>
+          <div class="info-box col-xs-12">
+            <h2 class="title-product"><%= prod.name %></h2>
+            <h3 class="price-product"><%= "R$"+prod.price+",00" %></h3>
+          </div>
+        </div>
+      </a>
+      <% }); %>
+    </div>
+</div>
+</div>
+
 
 
 <% include ../templates/footer.ejs %>

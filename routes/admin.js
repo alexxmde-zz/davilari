@@ -3,7 +3,8 @@ var express = require('express'),
   multer = require('multer'),
   uploadSale = multer({dest: 'resources/img/sales'}),
   uploadProduct = multer({dest: 'resources/img/products/'}),
-  uploadAmbience = multer({dest: 'resources/img/ambiences'});
+  uploadAmbience = multer({dest: 'resources/img/ambiences'}),
+  uploadAcabamento = multer({dest: 'resources/img/acabamentos'});
 
   var cpUpload = uploadProduct.fields([{name: 'mainImage', maxCount : 1}, 
   {name: 'images', maxCount : 100 }]);
@@ -12,6 +13,8 @@ var express = require('express'),
 
   var caUpload = uploadAmbience.fields([{name: 'mainImage', maxCount : 1},
     {name: 'images', maxCount : 100}]);
+
+  var acUpload = uploadAcabamento.fields([{name: 'imagem', maxCount : 1}]);
  
 
 //Controller
@@ -21,6 +24,8 @@ var categoryController = require('../controllers/admin/categoryController');
 var saleController = require('../controllers/admin/saleController');
 
 var ambienceController = require('../controllers/admin/ambienceController');
+var acabamentoController = require('../controllers/admin/acabamentoController');
+var tipoAcabamentoController = require('../controllers/admin/tipoAcabamentoController');
 
 //Routes
 router.post('/login' , loginController.post);
@@ -53,6 +58,22 @@ router.get('/ambiente/:id', ambienceController.renderAmbience);
 router.get('/ambiente', ambienceController.renderForm);
 router.post('/ambiente', caUpload, ambienceController.postAmbience);
 router.put('/ambiente/:id', caUpload, ambienceController.updateAmbience);
+
+//Acabamentos
+router.get('/acabamentos', acabamentoController.renderIndex);
+router.get('/acabamento', acabamentoController.renderForm);
+router.get('/acabamento/:id', acabamentoController.renderAcabamento);
+router.post('/acabamento', acUpload, acabamentoController.addAcabamento);
+router.put('/acabamento/:id', acUpload, acabamentoController.updateAcabamento);
+
+//Tipos de Acabamentos
+router.get('/tipos_acabamento', tipoAcabamentoController.renderIndex);
+router.get('/tipo_acabamento/:id', tipoAcabamentoController.renderTipoAcabamento);
+router.post('/tipo_acabamento', tipoAcabamentoController.addTipoAcabamento);
+router.put('/tipo_acabamento/:id', tipoAcabamentoController.updateTipoAcabamento);
+
+
+
 
 
 

@@ -14,8 +14,7 @@ var express = require('express'),
 //IP Address
 app = express(),
 ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
-port = process.env.PORT || '8000';
-
+port = process.env.PORT || '8000'; 
 //BodyParser
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -43,3 +42,4 @@ app.listen(port, function(err) {
   console.log("Server started at: " + ip + " , port: " + port);
 
 });
+

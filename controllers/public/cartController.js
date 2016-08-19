@@ -1,4 +1,5 @@
 var utils = require('../../utils');
+var productDAO = require('../../models/data/mysql/productDAO');
 
 var buildHtml = function (data) {
   var cart = data.cart;
@@ -43,6 +44,9 @@ var buildHtml = function (data) {
     "    <fieldset>" + 
     "     Celular: "+ sender.cellphone  + 
     "  </fieldset>" + 
+ "    <fieldset>" + 
+    "     Mensagem: "+ sender.message  + 
+    "  </fieldset>" + 
     " <br />" + 
     "<br />" + 
     "<h2>Orçamento Solicitado</h2>" + 
@@ -81,10 +85,24 @@ function CartController () {
   this.deleteItem = function (req, res) {
     try {
 
-      var i = req.params.id;
-      console.log("Deleting item: " + i + " from cart");
-      delete req.session.cart.items[i];
-      console.log(req.session.cart.items);
+      var id = req.params.id;
+      var items = req.session.cart.items;
+      console.log("Deleting item: " + id + " from cart");
+      for(var i = 0; i <= items.length -1; i++) {
+        if(items[i]) {
+          console.log(items[i]);
+          if (items[i].id == id) {
+            console.log("deleting...");
+            delete items[i];
+          }
+        }
+      }
+      req.session.cart.items = items;
+
+
+      if(!req.session.cart.items || !req.session.cart.items == []) {
+        delete req.session.cart;
+      }
 
 
       return res.status(200).send();
@@ -116,8 +134,16 @@ function CartController () {
 
 
   this.getCart = function (req, res) {
+    productDAO.buscarDestaques(function (err, destaques) {
+      if (err) {
+        res.send(err);
+      } else {
 
-    res.render('public/pages/cart', {'cart' : req.session.cart });
+        res.render('public/pages/cart', {'cart' : req.session.cart, 'products' : destaques });
+      }
+
+    }); 
+
   };
 
 
