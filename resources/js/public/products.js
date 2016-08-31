@@ -104,3 +104,7 @@ jQuery.fn.ForceNumericOnly =
                 interval: false
               });
 
+              $('#amb-carousel').carousel({
+                interval: false
+              }); 
+

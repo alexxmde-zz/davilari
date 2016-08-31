@@ -1,0 +1,62 @@
+<% include ../../templates/header.ejs %>
+<style>
+</style>
+<div class="debugaum hidden">
+  <%= JSON.stringify(ambience) %>
+</div>
+<div class="container">
+  <h1 class="text-center"><%= ambience.name %></h1>
+  <!-- MAIN IMAGE -->
+  <div id="amb-carousel" class="carousel slide" data-ride="carousel">
+    <!-- Indicators -->
+    <ol class="carousel-indicators amb col-xs-12 hidden-xs">
+      <%
+        ambience.images.unshift(ambience.mainImage);
+        for(var i = 0; i < ambience.images.length; i++) {
+        if (i == 0)
+        var active = "amb-active";
+        else
+        active = "amb-active";
+        %>
+        <div data-target="#amb-carousel" data-slide-to="<%= i %>" class="<%= active %> c-selector col-sm-3 col-xs-6">
+          <img class="img img-responsive> " src="/resources/img/ambiences/<%= ambience.images[i] %>"</img>
+        </div>
+        <% } %>
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner amb" role="listbox">
+
+      <% for(var i = 0; i < ambience.images.length; i++) {
+                                if (i == 0)
+                                var active = "active";
+                                else
+                                active = "";
+                                %>
+                                <div class="item <%=active %>">
+                                  <div class="c-amb-main-image col-xs-12">
+                                    <img class="img" src="/resources/img/ambiences/<%= ambience.images[i] %>"</img>
+                                  </div>
+
+                                </div>
+                                <% } %>
+
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#amb-carousel" role="button" data-slide="prev">
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+</div>
+<script>
+
+
+</script >
+
+<%include ../../templates/footer.ejs %>

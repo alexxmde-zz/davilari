@@ -56,10 +56,10 @@ function AcabamentoDAO() {
   this.updateAcabamento = function (a, resolve, reject) {
     var query = "";
     if (a.imagem) {
-    query = "UPDATE Tb_Acabamento SET nome = ?, disponivel = ?, imagem = ?, idTipoAcabamento = ? ";
-    query += "WHERE IdAcabamento = ?";
+      query = "UPDATE Tb_Acabamento SET nome = ?, disponivel = ?, imagem = ?, idTipoAcabamento = ? ";
+      query += "WHERE IdAcabamento = ?";
 
-    var arr = [a.nome, utils.parseBin(a.disponivel), a.imagem, a.IdTipoAcabamento, a.IdAcabamento];
+      var arr = [a.nome, utils.parseBin(a.disponivel), a.imagem, a.IdTipoAcabamento, a.IdAcabamento];
     } else {
       query = "UPDATE Tb_Acabamento SET nome = ?, disponivel = ?, idTipoAcabamento = ? ";
       query += "WHERE IdAcabamento = ?";
@@ -82,6 +82,64 @@ function AcabamentoDAO() {
 
 
 
+  };
+
+  this.buscarAcabamentosOrganizadosPorTipo = function (resolve, reject) {
+    var goOn = true,
+      error = null;
+    arrTiposDeAcabamento = [],
+    query = "SELECT IdTipoAcabamento, nome FROM Tb_Tipo_Acabamento";
+
+  mysql.query(query, function (err, rows) {
+    if (err) {
+      goOn = false;
+      error = err;
+      return reject (err);
+    }
+    else {
+
+      var loopCount = rows.length;
+      var done = false;
+
+      for (var i = 0; i < rows.length; i++) {
+
+        if (goOn) {
+          var tipoDeAcabamento = {
+            'tipoAcabamento' : rows[i].nome,
+            'acabamentos' : []
+          };
+          query = "SELECT * FROM Tb_Acabamento WHERE IdTipoAcabamento = " + rows[i].IdTipoAcabamento;
+
+          mysql.query(query, function (err, erows) {
+            if (err) {
+              goOn = false;
+              error = err;
+              return reject (err);
+            } else {
+              for (var j = 0; j < erows.length; j++) {
+                tipoDeAcabamento.acabamentos.push(erows[j]);
+              }
+
+              loopCount = loopCount -1;
+              console.log("Loops left: " + loopCount);
+
+              if (loopCount == 0)
+                resolve(arrTiposDeAcabamento);
+            }
+          });
+
+          arrTiposDeAcabamento.push(tipoDeAcabamento);
+
+        } else {
+          reject (error);
+        }
+
+      } //End of For statement
+
+
+
+    }
+  });
   };
 
 

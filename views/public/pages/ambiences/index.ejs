@@ -1,0 +1,34 @@
+<% include ../../templates/header.ejs %>  
+<div class="row r-ambiences">
+</div>
+
+<div class="row">
+  <article id="ambience-content">
+    <div class="ambienceuctBox ">
+      <h1 class="title-ambienc-box text-center">
+        <% if (ambiences) { %>
+        Ambientes
+        <% } else { %>
+        Produtos
+        <% } %>
+      </h1>
+    </div>
+    <div class="col-xs-12 padding-sides ambienceuctList destaques">
+      <% ambiences.forEach(function(ambience) { %>
+      <a href="/ambiente/<%= ambience.IdAmbience %>">
+        <div class="ambience col-sm-6 col-md-4">
+          <div class="img-box text-center">
+            <img class="img-ambience" src="/resources/img/ambiences/<%= ambience.mainImage %>" />
+          </div>
+          <div class="info-box col-xs-12">
+            <h2 class="title-ambience"><%= ambience.name %></h2>
+          </div>
+        </div>
+      </a>
+      <% }); %>
+    </div>
+
+  </article>
+</div>
+
+<% include ../../templates/footer.ejs %>
