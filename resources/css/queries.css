@@ -1,5 +1,9 @@
 
 @media only screen and (min-width : 280px) {
+  .img-acabamento {
+    width:200px;
+    height:200px;
+  }
   /*AMBIENTE*/
   .indicators {
     bottom:-500px;

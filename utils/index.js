@@ -22,9 +22,10 @@ function Utils() {
         
   }
 
-  this.sendMail = function (html) {
+  this.sendMail = function (html, subject) {
     return new Promise (function (resolve, reject) {
       mailOptions.html = html;
+      mailOptions.subject = subject || mailOptions.subject;
 
       transporter.sendMail(mailOptions, function (error, info) {
         if (error) {

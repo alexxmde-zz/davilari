@@ -19,6 +19,7 @@ router.get('/produto/:id', productController.getProduct);
 router.get('/localizacao', locationController.getIndex);
 router.get('/empresa', enterpriseController.getIndex);
 router.get('/contato', contactController.getIndex);
+router.post('/contato', contactController.postForm);
 router.get('/acabamentos', acabamentoController.buscarTodos);
 
 router.post('/cart/item', cartController.postItem);

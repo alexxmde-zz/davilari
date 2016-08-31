@@ -10,7 +10,7 @@ function hideValidationMessages () {
 
 }
 
-function buildCartData () {
+function buildContactData () {
   var arr = ["name", "email", "phone", "cellphone", "message", "subject"];
   var objCart = {};
   arr.forEach(function(e) {
@@ -55,7 +55,7 @@ function validateForm () {
     $("#btn-enviar-contato").on("click", function (e){
       if ( validateForm() ) {
         $.ajax({
-          url: "/cart",
+          url: "/contato",
           method: "POST",
           data: buildContactData(),
           beforeSend: function () {
@@ -63,13 +63,14 @@ function validateForm () {
           }
 
         })
-        .success( function() {
+        .success( function(msg) {
           $("#btn-enviar-contato").addClass("hidden");
           $("#btn-enviado-contato").removeClass("hidden");
 
 
         }).fail(function (xhr, message) {
           console.log(xhr.statusText);
+          console.log(xhr.responseText);
           console.log(message);
           $("#contact-validation").text("Algo deu errado. Contato o administrador através do e-mail alexandre@davilari.com.br");
 

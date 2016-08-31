@@ -100,35 +100,38 @@ function AcabamentoDAO() {
 
       var loopCount = rows.length;
       var done = false;
+      var tipoDeAcabamento;
 
       for (var i = 0; i < rows.length; i++) {
 
         if (goOn) {
-          var tipoDeAcabamento = {
-            'tipoAcabamento' : rows[i].nome,
-            'acabamentos' : []
-          };
-          query = "SELECT * FROM Tb_Acabamento WHERE IdTipoAcabamento = " + rows[i].IdTipoAcabamento;
 
+          query = "SELECT * FROM Tb_Acabamento WHERE IdTipoAcabamento = " + rows[i].IdTipoAcabamento;
+          tipoDeAcabamento = {
+            'tipoAcabamento' : rows[i].nome,
+            'count' : i
+          };
+          console.log(tipoDeAcabamento.count + "\n\n");
+
+          (function(tipoDeAcabamento) {
           mysql.query(query, function (err, erows) {
             if (err) {
               goOn = false;
               error = err;
               return reject (err);
             } else {
-              for (var j = 0; j < erows.length; j++) {
-                tipoDeAcabamento.acabamentos.push(erows[j]);
-              }
-
+              tipoDeAcabamento.acabamentos = erows;
+              arrTiposDeAcabamento.push(tipoDeAcabamento);
               loopCount = loopCount -1;
-              console.log("Loops left: " + loopCount);
 
-              if (loopCount == 0)
+
+              if (loopCount == 0) {
                 resolve(arrTiposDeAcabamento);
+              }
             }
           });
+          }(tipoDeAcabamento));
 
-          arrTiposDeAcabamento.push(tipoDeAcabamento);
 
         } else {
           reject (error);

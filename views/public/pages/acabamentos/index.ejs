@@ -7,37 +7,32 @@
   </div>
 
   <div class="row">
-    <div class="debugao">
-    <%= JSON.stringify(tiposDeAcabamento) %>
+    <div class="debugao hidden">
+      <%= JSON.stringify(tiposDeAcabamento) %>
     </div>
+    <% for (var i = 0; i < tiposDeAcabamento.length; i++) { %>
+
+      <% if (tiposDeAcabamento[i].acabamentos.length) { %>
     <div class="col-xs-12 box-tipo-acabamento">
       <div class="tipo-acabamento-title">
         <h3 class="text-left">
-          Tipo do Acabamento
+          <%= tiposDeAcabamento[i].tipoAcabamento; %>
         </h3>
       </div>
       <!-- Acabamentos -->
       <div class="col-xs-12 box-acabamentos">
+        
+        <% for (var j = 0; j < tiposDeAcabamento[i].acabamentos.length; j++) { %>
         <div class="box-acabamento col-sm-3 col-xs-12">
-          <img src="" class="img-acabameno" />
-          <h4>Titulo do Acabamento</h4>
+          <img src="/resources/img/acabamentos/<%= tiposDeAcabamento[i].acabamentos[j].imagem %>" class="img-acabamento" />
+          <h4> <%= tiposDeAcabamento[i].acabamentos[j].nome %> </h4>
         </div>
-        <div class="box-acabamento col-sm-3 col-xs-12">
-          <img src="" class="img-acabameno" />
-          <h4>Titulo do Acabamento</h4>
-        </div>
-        <div class="box-acabamento col-sm-3 col-xs-12">
-          <img src="" class="img-acabameno" />
-          <h4>Titulo do Acabamento</h4>
-        </div>
-        <div class="box-acabamento col-sm-3 col-xs-12">
-          <img src="" class="img-acabameno" />
-          <h4>Titulo do Acabamento</h4>
-        </div>
-
+        <% } %>
       </div>
+      <% } %>
 
     </div>
+    <% } %>
   </div>
 </div>
 

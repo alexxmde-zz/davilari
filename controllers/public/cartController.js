@@ -87,20 +87,16 @@ function CartController () {
 
       var id = req.params.id;
       var items = req.session.cart.items;
-      console.log("Deleting item: " + id + " from cart");
-      for(var i = 0; i <= items.length -1; i++) {
-        if(items[i]) {
-          console.log(items[i]);
-          if (items[i].id == id) {
-            console.log("deleting...");
+      console.log(items);
+      for (var i = 0; i < items.length; i++) {
+          if (items[i] && items[i].id == id) {
             delete items[i];
           }
-        }
       }
       req.session.cart.items = items;
 
 
-      if(!req.session.cart.items || !req.session.cart.items == []) {
+        if(!req.session.cart.items.length > 0) {
         delete req.session.cart;
       }
 
