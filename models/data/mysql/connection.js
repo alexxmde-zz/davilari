@@ -24,12 +24,7 @@ switch (process.env.dbenvironment) {
 }
 }
 catch (e) {
-  var credentials =  {"url" : "davilari.mysql.uhserver.com",
-    "port" : "3306",
-    "user" : "davilari",
-    "password" : "@Cthulhu1",
-    "database" : "davilari"
-  };
+ 
 }
 
 
