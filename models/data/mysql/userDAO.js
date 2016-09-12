@@ -14,8 +14,12 @@ function UserRepository() {
     mysql.query(query, function (err, rows, fields) {
       if (err) return cb(err);
 
+      if(rows.length) {
       user = {'username' : rows[0].username};
-      cb (null, user);
+      return cb (null, user);
+      } else {
+        return cb("Usuário não encontrado", null);
+      }
 
     });
   };

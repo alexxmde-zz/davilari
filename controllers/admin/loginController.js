@@ -2,23 +2,15 @@ var userDAO = require('../../models/data/mysql/userDAO');
 var productController = require("./productController");
 function loginController () {
 
-  var VerifyUser = function (err, user, req, res) {
-    if(err) {
-      console.error(err);
-      return res.status(500).send(err);
-    }
+  var VerifyUser = function (user, req, res) {
     if (user) {
       req.session.isLogged = true;
       return res.status(200).send("OK");
 
     } else {
-
       console.log("User not found");
       return res.status(400).send("Usuario nao encontrado :" + user);
-
     }
-
-
   };
 
   this.get = function (req, res) {
@@ -35,7 +27,18 @@ function loginController () {
   this.post = function (req, res) {
     var user = req.body;
     userDAO.FindByNameAndPassword(user.username, user.password, function(err, user) {
-      VerifyUser(err, user, req, res);
+      if (err) 
+      return res.status(500).send(err);
+      
+      if(user) {
+        req.session.isLogged = true;  
+        return res.status(200).send("OK");
+      } else {
+        return res.status(400).send("Usuário não encontrado");
+      }
+      
+      VerifyUser(user, req, res);
+      
     });
   };
 
