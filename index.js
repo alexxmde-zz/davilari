@@ -7,14 +7,14 @@ var express = require('express'),
   session = require('express-session'),
   adminRouter = require('./routes/admin'),
   publicRouter = require('./routes/public'),
-  sessionCheck = require('./middlewares/session');
+  sessionCheck = require('./middlewares/session'),
 
 
 
 //IP Address
 app = express(),
 ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
-port = process.env.PORT || '8000'; 
+port = process.env.OPENSHIFT_NODEJS_PORT || '8000'; 
 //BodyParser
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());

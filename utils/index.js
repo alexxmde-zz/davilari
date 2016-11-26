@@ -20,7 +20,7 @@ function Utils() {
     else
       return 1;
         
-  }
+  };
 
   this.sendMail = function (html, subject) {
     return new Promise (function (resolve, reject) {

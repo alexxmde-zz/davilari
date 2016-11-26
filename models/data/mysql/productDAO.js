@@ -8,7 +8,7 @@ function productDAO() {
       cb(rows[0].a);
     });
 
-  }
+  };
 
   var insertImages = function (images, IdProduct, cb) {
 
@@ -156,6 +156,7 @@ function productDAO() {
           insertImages(product.images, ProductId,  function(err) {
             if (err) {
               console.log("Error inserting image");
+              console.log(err);
               return cb(err);
             } else {
 
@@ -294,7 +295,7 @@ function productDAO() {
         if (err) return reject (err);
 
         return resolve (products);
-      })
+      });
 
     });
   };
