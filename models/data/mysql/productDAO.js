@@ -289,7 +289,9 @@ function productDAO() {
       var query = "SELECT * FROM Tb_Product ";
       query += " JOIN Tb_Product_Category USING (IdProduct) ";
       query += " WHERE IdCategory = " + id + " ";
-      query += "AND destaque =0";
+      //query += "AND destaque =0";
+
+
 
       mysql.query(query, function (err, products) {
         if (err) return reject (err);

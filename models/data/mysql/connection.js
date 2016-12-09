@@ -2,13 +2,14 @@ var mysql = require ('mysql');
 var fs = require('fs');
 console.log("Selected Environment: " + process.env.dbenvironment);
 
-try{
   switch (process.env.dbenvironment) {
 
     case "development":
+
       var credentials = JSON.parse(
         fs.readFileSync(__dirname + '/credentials.json', 'utf-8')
       ).development;
+
       break;
 
     case "test":
@@ -20,6 +21,8 @@ try{
     case "production":
       var credentials = JSON.parse(fs.readFileSync(__dirname + "/credentials.json", "utf-8"))
         .production;
+        break;
+      }
 
       var connection = mysql.createConnection({
         host: process.env.OPENSHIFT_MYSQL_DB || credentials.url,
@@ -29,15 +32,8 @@ try{
         database : credentials.database
       });
 
+      connection.connect((err) => {
+
+      })
 
       module.exports = connection;
-  }
-}
-catch (e) {
-  console.log(e);
-
-}
-
-
-
-
