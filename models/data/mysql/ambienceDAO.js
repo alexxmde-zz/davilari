@@ -6,6 +6,7 @@ function AmbienceDAO () {
 
   //Retrive ALL ambiences from the database
   this.getAllAmbiences = function (resolve, reject) {
+  debugger;
 
     //Build the query
     var query = "SELECT * FROM Tb_Ambience; ";
@@ -29,6 +30,7 @@ function AmbienceDAO () {
 
   //Get an ambience and it's images
   this.getAmbience = function (IdAmbience, resolve, reject) {
+  debugger;
     //Build query to get ambience
     var query = "SELECT * FROM Tb_Ambience";
     query += " WHERE IdAmbience = " + IdAmbience;
@@ -71,6 +73,8 @@ function AmbienceDAO () {
 
   //Insert and ambience
   this.addAmbience = function (ambience, resolve, reject) {
+  debugger;
+  console.log("a");
     //Build insert query
     var query = "INSERT INTO Tb_Ambience (name, description, mainImage, featured) ";
     query += "VALUES (?, ?, ?, ?); ";
@@ -87,6 +91,7 @@ function AmbienceDAO () {
         console.log(arrValues);
         console.log("Error: /n");
         console.log(query);
+        debugger;
         reject (err);
         return;
 

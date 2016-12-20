@@ -1,51 +1,39 @@
 var saleDAO = require('../../models/data/mysql/saleDAO');
+let salesModel = require('../../models/sales');
 
 function SalesController() {
 
   this.get = function (req, res) {
-    saleDAO.findAll()
-      .then( 
-        function(sales) {
-
-        res.render('admin/pages/sale', {sales : sales});
-      },
-      function(err){
-        return res.status(500).send(err);
-      });
+    salesModel.find({}, (err, sales) => {
+        if (err) res.status(500).send(err);
+        else res.render('admin/pages/sale', {sales : sales });
+        })
   };
 
-  
+
 
   this.getForm = function (req, res) {
     res.render('admin/pages/sale/form', {sale : {}});
   };
 
   this.getOne = function (req, res) {
-    saleDAO.findOne(req.param('id'))
-      .then(
-        function success (sale) {
-          console.log(sale);
-          return res.render('admin/pages/sale/form', {sale : sale});
-        },
-        function failure (err) {
-          return res.status(500).send(err);
-        }
-      );
+    debugger;
+    salesModel.findById(req.params.id, (err, sale) => {
+    debugger;
+        if (err) res.status(500).send(err);
+        else res.render('admin/pages/sale/form', {sale: sale});
+        })
   };
 
   this.post = function (req, res) {
-    var sale = req.body;
+    var sale = new salesModel(req.body);
     sale.image = req.files.image[0].filename;
 
-    saleDAO.insert(sale)
-      .then(function() {
-        res.status(200).send("OK");
-      },
-      function (err) {
-        res.status(500).send(err);
-      });
-
-  };
+    sale.save(err => {
+        if (err) res.status(500).send(err)
+        else res.send("OK");
+        })
+    };
 
   this.put = function (req, res) {
     var sale = req.body;
@@ -57,12 +45,12 @@ function SalesController() {
 
     saleDAO.update(IdSale, sale)
       .then(
-        function resolve () {
+          function resolve () {
           return res.status(200).send("OK");
-        },
-        function reject (err) {
+          },
+          function reject (err) {
           return res.status(500).send(err);
-        });
+          });
 
   };
 
