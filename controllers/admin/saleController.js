@@ -36,22 +36,20 @@ function SalesController() {
     };
 
   this.put = function (req, res) {
-    var sale = req.body;
+    let sale = req.body;
+    sale.active = sale.active ? true : false;
 
     if (req.files.image) {
       sale.image = req.files.image[0].filename;
     }
-    IdSale = req.param('id');
 
-    saleDAO.update(IdSale, sale)
-      .then(
-          function resolve () {
-          return res.status(200).send("OK");
-          },
-          function reject (err) {
-          return res.status(500).send(err);
-          });
-
+    IdSale = req.params.id;
+    salesModel.findByIdAndUpdate(IdSale, sale, err => {
+        if(err)
+        res.status(500).send(err);
+        else
+        res.send("OK");
+        })
   };
 
 }
