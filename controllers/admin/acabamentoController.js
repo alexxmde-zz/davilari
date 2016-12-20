@@ -1,9 +1,9 @@
 const acabamentoModel = require('../../models/acabamento');
 const tipoAcabamentoModel = require('../../models/tipoAcabamento');
 
-function AcabamentoController () {
+class AcabamentoController {
 
-  this.renderIndex = function (req, res) {
+  renderIndex(req, res) {
     acabamentoModel.find({})
     .populate('tipo')
     .exec((err, acabamentos) => {
@@ -14,11 +14,11 @@ function AcabamentoController () {
     });
   };
 
-  this.addAcabamento = function (req, res) {
+  addAcabamento(req, res) {
     let acabamento = new acabamentoModel(req.body);
-    acabamento.tipo = req.body.IdTipoAcabamento;
 
     acabamento.imagem = req.files.imagem[0].filename;
+    
     acabamento.save(err => {
         if (err)
           res.status(500).send(err);
@@ -27,7 +27,7 @@ function AcabamentoController () {
         })
   };
 
-  this.renderForm = function (req, res) {
+  renderForm(req, res) {
     tipoAcabamentoModel.find({}, (err, tipos) => {
       if (err)
         res.status(500).send(err);
@@ -36,7 +36,7 @@ function AcabamentoController () {
     });
   }
    
-  this.renderAcabamento = function (req, res) {
+  renderAcabamento(req, res) {
     tipoAcabamentoModel.find({}, (err, tipos) => {
       if (err)
        return res.status(500).send(err);
@@ -49,23 +49,24 @@ function AcabamentoController () {
         })
       }
     })
-  };
+  }
 
-  this.updateAcabamento = function (req, res) {
-    let acabamento = req.body;
-    acabamento.IdAcabamento = req.params.id;
-    acabamento.tipo = acabamento.IdTipoAcabamento;
+  updateAcabamento(req, res) {
+    //Parse request.
+    let acabamento = req.body,
+        id = req.params.id;
 
+    //Append Image.
     if (req.files.imagem) {
       acabamento.imagem = req.files.imagem[0].filename;
     }
-
-    acabamentoModel.findByIdAndUpdate(req.params.id, acabamento,
+    //Update and send response.
+    acabamentoModel.findByIdAndUpdate(id, acabamento,
       err => {
         if (err) res.status(500).send(err);
         else res.send();
       })
-  };
+  }
 
 }
 
