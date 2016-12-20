@@ -15,7 +15,7 @@
             <% if (tipos) {
                   tipos.forEach(function(t) { %>
                   <option
-                  <% if (t.IdTipoAcabamento == acabamento.IdTipoAcabamento) { %>
+                  <% if (t.IdTipoAcabamento == acabamento.tipo) { %>
                   selected
                   <% } %>
                   value="<%= t.IdTipoAcabamento %>">

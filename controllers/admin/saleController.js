@@ -1,4 +1,3 @@
-var saleDAO = require('../../models/data/mysql/saleDAO');
 let salesModel = require('../../models/sales');
 
 function SalesController() {
@@ -10,16 +9,12 @@ function SalesController() {
         })
   };
 
-
-
   this.getForm = function (req, res) {
     res.render('admin/pages/sale/form', {sale : {}});
   };
 
   this.getOne = function (req, res) {
-    debugger;
     salesModel.findById(req.params.id, (err, sale) => {
-    debugger;
         if (err) res.status(500).send(err);
         else res.render('admin/pages/sale/form', {sale: sale});
         })
@@ -33,7 +28,7 @@ function SalesController() {
         if (err) res.status(500).send(err)
         else res.send("OK");
         })
-    };
+  };
 
   this.put = function (req, res) {
     let sale = req.body;

@@ -1,6 +1,5 @@
-let mongoose = require('mongoose');
-
-  let schema = new mongoose.Schema({
+let mongoose = require('mongoose'),
+  schema = new mongoose.Schema({
   name : String,
   description : String,
   subdescription : String,
@@ -10,7 +9,7 @@ let mongoose = require('mongoose');
 });
   schema.virtual('IdSale').get(function() {
     return this._id.toHexString();
-  })
+  });
 
 let model = mongoose.model('Sale', schema);
 
