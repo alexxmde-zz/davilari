@@ -1,26 +1,22 @@
 var ambienceDAO = require('../../models/data/mysql/ambienceDAO.js');
+let ambiencesModel = require('../../models/ambiences');
 
-function ambienceController() {
+class ambienceController {
 
-  this.getAllAmbiences = function (req, res) {
-    ambienceDAO.getAllAmbiences(function resolve(ambiences) {
-      res.render('public/pages/ambiences', {'ambiences' : ambiences});
-    },
-    function reject(error) {
-      res.send(error);
-    });
+  getAllAmbiences (req, res) {
+  let  findAmbs = ambiencesModel.find({}).exec();
+   findAmbs.then(ambs => {
+    res.render('public/pages/ambiences', {'ambiences' : ambs});
+   })
 
+   findAmbs.catch(err => res.send(error))
+    
   };
 
-  this.getAmbience = function (req, res) {
-    ambienceDAO.getAmbience(req.params.id,
-      function resolve(ambience) {
-        res.render('public/pages/ambiences/ambience', {'ambience' : ambience});
-      },
-      function reject(error) {
-        res.send(error);
-      });
-  };
+  getAmbience (req, res) {
+    let findAmb = ambiencesModel.findById(req.params.id).exec();
+    findAmb.then(amb => res.render('public/pages/ambiences/ambience', {ambience:amb}));
+    findAmb.catch(amb => res.status(500).send(err));
+  }
 }
-
 module.exports = new ambienceController();

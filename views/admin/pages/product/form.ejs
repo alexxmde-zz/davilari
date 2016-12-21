@@ -27,8 +27,8 @@
             <option
                                                 value="<%= cat.IdCategory %>"
                                                 <%
-                                                if(product.categories) {
-                                                if (cat.IdCategory.toString() == product.categories[0].toString()) { %>
+                                                  if(product.category) {
+                                                  if (cat.IdCategory == product.category) { %>
                                                 selected
                                                 <% }
                                                 } %>

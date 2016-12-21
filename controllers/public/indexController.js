@@ -1,21 +1,20 @@
-var saleDAO = require("../../models/data/mysql/saleDAO");
-var productDAO = require("../../models/data/mysql/productDAO");
+let productsModel = require('../../models/products');
+let salesModel = require('../../models/sales');
 
-function IndexController () {
+class IndexController {
+  get(req, res) {
+    let proms = [];
+    //Populate promises array.
+    proms.push( salesModel.find({}).exec());
+    proms.push(productsModel.find({'destaque' : true}).exec());
 
-  this.get = function (req, res) {
-    saleDAO.findAll()
-      .then(function resolve(sales) {
-        productDAO.buscarDestaques(function (err, destaques) {
+    let results = Promise.all(proms);
 
-        res.render('public/pages/index', {"sales" : sales, "products" : destaques});
+    //When ALL complete.
+    results.then(results => {
+        res.render('public/pages/index', {"sales" : results[0], "products" : results[1]});
         });
-      },
-      function reject(err) {
-        console.log(err);
-        res.render('public/pages/error', {error : err});
-      });
-  };
+  }
 }
 
 module.exports = new IndexController();

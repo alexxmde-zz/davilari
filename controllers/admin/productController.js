@@ -1,121 +1,85 @@
 var productDAO = require('../../models/data/mysql/productDAO');
 var categoryDAO= require('../../models/data/mysql/categoryDAO.js');
 
+let productsModel = require('../../models/products');
+let categoriesModel = require('../../models/categories');
 
-function ProductController () {
-  this.api = {};
-  this.api.get = function (req, res) {
-    productModel.find(function(err, products) {
-      res.status(200).json(products);
-    });
+class ProductController  {
+  get (req, res) {
+    let search = req.params.search,
+        query = search ? {'name':search} : {};
+
+    let findProducts = productsModel.find(query);
+
+    findProducts.then(products => {
+        res.render('admin/pages/product', {products:products});
+        });
+
+    findProducts.catch(err => res.status(500).send(err));
   };
 
-  this.get = function (req, res) {
-    var _products = [];
-
-    if (req.param('search')) {
- productDAO.findByName(req.param('search'), function(err, products) {
-        if (err) {
-          console.log(err);
-          return res.status(500).send(err);
-        }
-
-        res.render("admin/pages/product", {products : products});
-      });
-
-    } else {
-
-      productDAO.findAll(function(err, products) {
-        if (err) {
-          console.log(err);
-          return res.status(500).send(err);
-        }
-
-        res.render("admin/pages/product", {products : products});
-      });
-
-    }
+  getAdd(req, res) {
+    categoriesModel.find({}, (err, categories) => {
+        res.render('admin/pages/product/form', {"product" : {}, "categories" : categories});
+        });
   };
 
-  this.getAdd = function(req, res) {
-    categoryDAO.findAll(function(err, categories) {
-
-      res.render('admin/pages/product/form', {"product" : {}, "categories" : categories});
-    });
-  };
-
-  this.post = function (req, res) {
-    var product = req.body;
-
-    product.images = req.files['images'].map(function (obj) {
-      return obj.filename;
-    }); //SANTO MAP
-
-    //Um dia isso vai ser N categorias para 1 produto.
-    product.categories = [];
-    product.categories.push(product.category);
-
+  post(req, res) {
+    let product = new productsModel(req.body);
     product.mainImage = req.files['mainImage'][0].filename;
+    product.images = req.files['images'].map(function (obj) {
+        return obj.filename;
+        }); //SANTO MAP
 
-    productDAO.insert(product, function (err) {
-      if (err) {
-        res.status(500).send(err);
+    let save = product.save();
 
-      }  else {
-        return res.status(200).send("OK");
+    save.then(() => res.send());
+      save.catch(err => res.status(500).send(err));
+    };
 
-      }
-
-    });
-
-  };
-
-  this.put = function (req, res) {
-
+    put(req, res) {
+    debugger;
     var product = req.body;
-        product.images = [];
-
+    product.images = [];
+    //Get new images;
     if (req.files['images']) {
 
       product.images = req.files['images'].map(function (obj) {
-        return obj.filename;
-      });
+          return obj.filename;
+          });
 
     }
-
-    if (req.files['mainImage']) {
-      product.mainImage = req.files['mainImage'][0].filename;
-    }
-
+    //Append old images.
     product.old_images = JSON.parse(product.old_images);
     product.images = product.images.concat(product.old_images);
 
-    product.IdProduct = req.params.id;
+    //Get new Main Image
+    if (req.files['mainImage']) {
+      product.mainImage = req.files['mainImage'][0].filename;
+    }
+    //Destaque
+    product.destaque = product.destaque ? true : false;
 
-    product.categories = [];
-    product.categories.push(product.category);
-
-    productDAO.update(product, function (err, prod) {
-
-      res.status(200).send("OK");
-
-    }, function(err) {
-      return res.status(500).send(err);
-    });
+    let update = productsModel.findByIdAndUpdate(req.params.id, product);
+    update.then(() => res.send());
+    update.catch(err => res.status(500).send(err));
 
   };
 
-  this.getOne = function (req, res) {
-    productDAO.findOne(req.params.id, function (err, prod) {
-      if (err) return res.status(500).send(err);
-      categoryDAO.findAll(function(err, cats) {
-        if(err) return res.status(500).send(err);
-        console.log(prod);
-        res.render('admin/pages/product/form',
-          {product : prod, categories : cats}
-        );
-      });
-    });
+  getOne (req, res) {
+    productsModel.findById(req.params.id,(err, prod) => {
+        if (err)
+          return res.status(500).send(err);
+          else {
+          categoriesModel.find({},function(err, cats) {
+              if(err) return res.status(500).send(err);
+              debugger;
+              res.render('admin/pages/product/form',
+                  {product : prod, categories : cats}
+                  );
+              });
+          }
+          });
   };
 }
 

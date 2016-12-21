@@ -40,6 +40,7 @@ app.listen(port, ip, function(err) {
     return;
   }
   mongoose.connect('mongodb://localhost/davilari');
+  mongoose.Promise = global.Promise;
 
   console.log("Server started at: " + ip + " , port: " + port);
 
