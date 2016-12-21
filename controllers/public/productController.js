@@ -1,88 +1,35 @@
-var productDAO = require('../../models/data/mysql/productDAO');
+let productsModel = require('../../models/products');
+let categoriesModel = require('../../models/categories');
+class ProductController  {
 
-categoryDAO= require('../../models/data/mysql/categoryDAO');
-function ProductController () {
+  get(req, res) {
+    let query = req.param('categoria')
+      ? {'name' : req.param('categoria') } 
+    : {},
 
+      categories = categoriesModel.find({}).exec(),
+      products = productsModel.find().populate({path:'category', match: query}).where(),
+      results = Promise.all([categories, products]);
 
-  this.get = function (req, res) {
-    var categoryToFind = req.param('categoria');
-    var isAmbiente = false;
+    results.then(arr => {
+        let categories = arr[0],
+        products = arr[1],
+        queryCategory = req.params.categoria,
+        ambiente = false;
 
-    categoryDAO.findAll(function(err, cats) {
+        products = products.filter(p=> {
+          return p.category;
+        })
 
-        if (categoryToFind) {
-        categoryDAO.findByName(categoryToFind, function(err, cat) {
-            if (cat) {
-
-            productDAO.findProductByIdCategory(cat.IdCategory).then(
-                function resolve (prods) {
-
-                res.render('public/pages/products', {'ambiente' : isAmbiente, products : prods, categories : cats, queryCategory: categoryToFind});
-
-                },
-                function reject(err){
-                res.render('public/pages/error', {error: err});
-                });
-            } else {
-            productDAO.findAllProducts(function(err, prods) {
-                res.render('public/pages/products', {'ambiente' : isAmbiente, products : prods, categories : cats, queryCategory: categoryToFind});
-                });
-
-            }
-            });
-
-        } else {
-          productDAO.findAllProducts(function(err, prods) {
-              res.render('public/pages/products', {'ambiente' : isAmbiente, products : prods, categories : cats, queryCategory: categoryToFind});
-              });
-        }
-    });
-  };
-
-  this.getAmbientes = function (req, res) {
-    var categoryToFind = req.param('categoria');
-    isAmbiente = true;
-
-    categoryDAO.findAll(function(err, cats) {
-        if (categoryToFind) {
-        categoryDAO.findByName(categoryToFind, function (err, cat) {
-            if (err) return res.status(500).render(err);
-            if (cat) {
-
-            productDAO.findAmbientesByCategory(cat.IdCategory)
-            .then(function resolve (ambientes) {
-                return res.render('public/pages/products',
-                    {'ambiente': isAmbiente, 'products' : ambientes, 'categories' : cats, 'queryCategory': categoryToFind});
-
-                },
-                function reject (err) {
-                return res.status(500).render(err);
-                });
-            }
-
-            });
-
-        } else {
-        productDAO.findAmbientes().then(
-            function resolve(products) {
-
-            return res.render('public/pages/products',
-                {'ambiente' : isAmbiente, products : products, categories : cats, queryCategory: categoryToFind});
-            },
-            function reject(err) {
-            res.render('public/pages/error', {error: err});
-            });
-        }
-    });
-
-  };
-
-  this.getProduct = function (req, res) {
-    productDAO.findOne(req.params.id, function (err, prod) {
-        return res.render('public/pages/products/product', {'product' : prod});
+        res.render('public/pages/products', {ambiente, products, categories, queryCategory})
         });
-
-  };
+     }
+ 
+  getProduct(req, res) {
+    let findProd = productsModel.findById(req.params.id).exec();
+    findProd.then(prod => res.render('public/pages/products/product', {'product':prod}));
+    findProd.catch(err => res.status(500).send(err));
+  }
 }
 
 module.exports = new ProductController();
