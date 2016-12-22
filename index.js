@@ -16,7 +16,7 @@ let express = require('express'),
 app = express(),
 ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
 port = process.env.OPENSHIFT_NODEJS_PORT || '8000',
-db_host = process.env.OPENSHIFT_MONGO_DB_HOST || 'localhost';
+db_host = process.env.OPENSHIFT_MONGODB_DB_HOST || 'localhost';
 db_name = 'enterprise';
 con_str = `mongodb://${db_host}/${db_name}`;
 
