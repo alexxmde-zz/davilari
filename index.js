@@ -22,7 +22,7 @@ db_username = process.env.OPENSHIFT_MONGODB_DB_USERNAME || '',
 db_password = process.env.OPENSHIFT_MONGODB_DB_PASSWORD || '',
 con_str = '';
 if(db_username) 
-con_str = `mongodb://${db_username}:${db_password}${db_host}/${db_name}`;
+con_str = `mongodb://${db_username}:${db_password}@${db_host}/${db_name}`;
 else
 con_str = `mongodb://${db_host}/${db_name}`;
 
