@@ -1,4 +1,3 @@
-var tipoAcabamentoDAO = require('../../models/data/mysql/tipoAcabamentoDAO.js');
 const tipoAcabamentoModel = require('../../models/tipoAcabamento');
 
 class TipoAcabamentoController {

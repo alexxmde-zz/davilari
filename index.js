@@ -17,6 +17,8 @@ app = express(),
 ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
 port = process.env.OPENSHIFT_NODEJS_PORT || '8000',
 db_host = process.env.OPENSHIFT_MONGO_DB_HOST || 'localhost';
+db_name = 'enterprise';
+con_str = `mongodb://${db_host}/${db_name}`;
 
 
 //BodyParser
@@ -42,7 +44,8 @@ app.listen(port, ip, function(err) {
     console.error("Erro ao iniciar servidor: " + err);
     return;
   }
-  mongoose.connect(db_host);
+  console.log(con_str);
+  mongoose.connect(con_str);
   mongoose.Promise = global.Promise;
 
   console.log("Server started at: " + ip + " , port: " + port);

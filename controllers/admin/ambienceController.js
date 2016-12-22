@@ -1,4 +1,3 @@
-var ambienceDAO = require('../../models/data/mysql/ambienceDAO.js');
 let ambiencesModel = require('../../models/ambiences');
 
 class AmbienceController {

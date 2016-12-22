@@ -1,6 +1,3 @@
-var productDAO = require('../../models/data/mysql/productDAO');
-var categoryDAO= require('../../models/data/mysql/categoryDAO.js');
-
 let productsModel = require('../../models/products');
 let categoriesModel = require('../../models/categories');
 
