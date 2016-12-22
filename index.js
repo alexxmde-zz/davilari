@@ -18,8 +18,8 @@ ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
 port = process.env.OPENSHIFT_NODEJS_PORT || '8000',
 db_host = process.env.OPENSHIFT_MONGODB_DB_HOST || 'localhost',
 db_name = 'enterprise',
-db_username = process.env.OPENSHIFT_MONGODB_DB_USERNAME;
-db_password = process.env.OPENSHIFT_MONGODB_DB_PASSWORD;
+db_username = process.env.OPENSHIFT_MONGODB_DB_USERNAME,
+db_password = process.env.OPENSHIFT_MONGODB_DB_PASSWORD,
 con_str = `mongodb://${db_username}:${db_password}@${db_host}/${db_name}`;
 
 
