@@ -15,7 +15,10 @@ let express = require('express'),
 //IP Address
 app = express(),
 ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
-port = process.env.OPENSHIFT_NODEJS_PORT || '8000';
+port = process.env.OPENSHIFT_NODEJS_PORT || '8000',
+db_host = process.env.OPENSHIFT_MONGO_DB_HOST || 'localhost';
+
+
 //BodyParser
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(bodyParser.json());
@@ -39,7 +42,7 @@ app.listen(port, ip, function(err) {
     console.error("Erro ao iniciar servidor: " + err);
     return;
   }
-  mongoose.connect('mongodb://localhost/davilari');
+  mongoose.connect(db_host);
   mongoose.Promise = global.Promise;
 
   console.log("Server started at: " + ip + " , port: " + port);
