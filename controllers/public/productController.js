@@ -6,23 +6,26 @@ class ProductController  {
     let query = req.param('categoria')
       ? {'name' : req.param('categoria') } 
     : {},
+    limit = 0,
+    skip = req.param('skip') || 0;
 
-      categories = categoriesModel.find({}).exec(),
-      products = productsModel.find().populate({path:'category', match: query}).where(),
+      categoriesModel.findOne(query).then(c => {
+
+      let categories = categoriesModel.find({}).exec(),
+      products = productsModel.find({category : c._id}).limit(limit).skip(skip*10).populate({path:'category', match: query}).where(),
       results = Promise.all([categories, products]);
 
     results.then(arr => {
         let categories = arr[0],
         products = arr[1],
-        queryCategory = req.params.categoria,
+        queryCategory = req.param('categoria'),
+        pCount = products.length,
         ambiente = false;
+        
 
-        products = products.filter(p=> {
-          return p.category;
-        })
-
-        res.render('public/pages/products', {ambiente, products, categories, queryCategory})
+        res.render('public/pages/products', {ambiente, products, categories, queryCategory, pCount})
         });
+        })
      }
  
   getProduct(req, res) {

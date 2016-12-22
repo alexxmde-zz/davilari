@@ -18,10 +18,13 @@ ip = process.env.OPENSHIFT_NODEJS_IP || '127.0.0.1',
 port = process.env.OPENSHIFT_NODEJS_PORT || '8000',
 db_host = process.env.OPENSHIFT_MONGODB_DB_HOST || 'localhost',
 db_name = 'enterprise',
-db_username = process.env.OPENSHIFT_MONGODB_DB_USERNAME,
-db_password = process.env.OPENSHIFT_MONGODB_DB_PASSWORD,
-con_str = `mongodb://${db_username}:${db_password}@${db_host}/${db_name}`;
-
+db_username = process.env.OPENSHIFT_MONGODB_DB_USERNAME || '',
+db_password = process.env.OPENSHIFT_MONGODB_DB_PASSWORD || '',
+con_str = '';
+if(db_username) 
+con_str = `mongodb://${db_username}:${db_password}${db_host}/${db_name}`;
+else
+con_str = `mongodb://${db_host}/${db_name}`;
 
 //BodyParser
 app.use(bodyParser.urlencoded({extended: true}));
