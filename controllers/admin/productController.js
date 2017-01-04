@@ -78,6 +78,15 @@ class ProductController  {
           }
           });
   };
+
+  delete(req, res) {
+    productsModel.remove({ _id : req.params.id}, (err) => {
+      if (err) 
+        return res.status(500).send(err);
+      else
+        return res.send();
+    });
+  }
 }
 
 module.exports = new ProductController();

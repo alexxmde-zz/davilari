@@ -112,4 +112,24 @@ $("#imageModal").on("show.bs.modal", function (e) {
 
 });
 
+$('#btn-excluir').on('click', function(e) {
+
+  var locArr = window.location.href.split('/');
+  var id = locArr[locArr.length-1];
+  var xhr = new XMLHttpRequest();
+
+  xhr.open('DELETE','/admin/produto/' + id);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      alert("Produto excluido!");
+      window.location = '/admin/produtos';
+    } else {
+      alert(xhr.responseText);
+    }
+  }
+
+  xhr.send();
+
+});
+
 

@@ -8,7 +8,7 @@
       <a href="/ambientes?categoria=<%= cat.name %>">
         <% } else {%>
 
-      <a href="/produtos?categoria=<%= cat.name %>">
+      <a href="/produtos?categoria=<%= cat.name %>#query">
         <% } %>
 
         <div class="category-button">
@@ -44,7 +44,7 @@
 
     </div>
 
-      <h2 class="product-category text-center"><%= queryCategory %></h2>
+      <h2 id="query" class="product-category text-center"><%= queryCategory %></h2>
     <div class="col-xs- 12 padding-sides productList destaques">
       <%
       products.forEach(function(prod) { 

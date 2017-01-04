@@ -37,6 +37,7 @@ router.get('/produtos/novo', productController.getAdd);
 router.get('/produto/:id', productController.getOne);
 router.post('/produtos/novo', cpUpload, productController.post);
 router.put('/produto/:id', cpUpload, productController.put);
+router.delete('/produto/:id', productController.delete);
 
 //Categorias 
 router.get('/categorias', categoryController.get);
