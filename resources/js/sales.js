@@ -20,16 +20,6 @@ $(document).ready(function () {
         isValid = false;
       }
 
-      if (!data.get('subdescription')) {
-        $("#subdescription-validation").text("Campo obrigatorio!");
-        isValid = false;
-      }
-
-
-      if (!data.get('link')) {
-        $("#link-validation").text("Campo obrigatorio!");
-        isValid = false;
-      }
 
       if (!data.get('image')) {
         if(!isUpdate) {

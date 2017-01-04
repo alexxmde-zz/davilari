@@ -5,7 +5,7 @@ class IndexController {
   get(req, res) {
     let proms = [];
     //Populate promises array.
-    proms.push( salesModel.find({}).exec());
+    proms.push( salesModel.find({'active':true}).exec());
     proms.push(productsModel.find({'destaque' : true}).exec());
 
     let results = Promise.all(proms);
