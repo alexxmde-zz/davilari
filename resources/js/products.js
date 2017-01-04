@@ -105,7 +105,7 @@ $("#imageModal").on("show.bs.modal", function (e) {
 });
 
 $('#btn-excluir').on('click', function(e) {
-
+  e.preventDefault();
   var locArr = window.location.href.split('/');
   var id = locArr[locArr.length-1];
   var xhr = new XMLHttpRequest();
@@ -113,8 +113,7 @@ $('#btn-excluir').on('click', function(e) {
   xhr.open('DELETE','/admin/produto/' + id);
   xhr.onload = function () {
     if (xhr.status === 200) {
-      alert("Produto excluido!");
-      window.location = '/admin/produtos';
+      document.location.href = '/admin/produtos';
     } else {
       alert(xhr.responseText);
     }
