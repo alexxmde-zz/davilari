@@ -98,4 +98,12 @@
   margin-top:10px;
   margin-bottom:50px;
 }
+#currentPage {
+  color:black;
+  text-decoration:underline;
+  font-size:20px;
+}
 
+.pageLink {
+  font-size:16px;
+}

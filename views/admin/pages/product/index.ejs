@@ -13,6 +13,8 @@
       <input type="submit" class="btn btn-default" id="search-button" type="button"
                                                                       value="Ok" />
       </form>
+
+      <a class="col-xs-12 text-right" href="/admin/produtos/novo"><button class="btn btn-default">Novo</button></a>
     </section>
 
     <article>
@@ -42,12 +44,19 @@
           <% }); %>
         </tbody>
       </table>
-    </article>
+      <% for(var i = 0; i < pageCount; i++) { %>
+        <a class="pageLink" href="/admin/produtos?page=<%= i %>&search=<%= search %>">
+          <% if(i == page) { %>
+            <span id="currentPage"><%= i + 1 %></span>
+          <% }else{ %>
+            <%= i + 1 %> <% } %>
+          </a>
+          <% } %>
+          </article>
 
-    <footer>
-      <a href="/admin/produtos/novo"><button class="btn btn-default">Novo</button>
-    </footer>
-  </div>
-</div>
+          <footer>
+          </footer>
+          </div>
+          </div>
 
-<% include ../../templates/footer.ejs %>
+          <% include ../../templates/footer.ejs %>

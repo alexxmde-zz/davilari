@@ -15,15 +15,6 @@ $(document).ready(function () {
         isValid = false;
       }
 
-      if (!data.get('description')) {
-        $("#description-validation").text("Campo obrigatorio!");
-        isValid = false;
-      }
-
-      if (!data.get('price')) {
-        $("#price-validation").text("Campo obrigatorio!");
-        isValid = false;
-      }
 
       if (!data.get('mainImage')) {
         if (!isUpdate) {
@@ -68,7 +59,7 @@ $(document).ready(function () {
 
 
     if (validateProduct(data)) {
-
+console.log("Sending ajax");
       $.ajax({
         url: url,
         type: method,
@@ -76,6 +67,7 @@ $(document).ready(function () {
         processData: false,
         contentType: false
       }).success(function(){
+              console.log("Success");
                window.location.href = loc;
       })
       .fail(function (xhr, type, error) {
