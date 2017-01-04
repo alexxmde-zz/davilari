@@ -15,7 +15,6 @@
       sales.forEach(function(s) {
           %>
           <!-- Beginning of the promo -->
-          <a href="<%= s.link %>">
           <div class="item <% if (i == 0) { %> active <% } %> col-xs-12 promo no-padding">
           <div class="c-promo-image" id="c-promo-image-<%= i %>">
           <style>
@@ -35,7 +34,6 @@
           <h2><%= s.description %></h2>
           </div>
 
-          </a>
           </div> <!-- end of item -->
 
           <% i++; }); %>

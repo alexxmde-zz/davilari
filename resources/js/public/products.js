@@ -99,7 +99,7 @@ jQuery.fn.ForceNumericOnly =
               })
 
 
-
+/*
               $('#image-carousel').carousel({
                 interval: false
               });
@@ -107,4 +107,5 @@ jQuery.fn.ForceNumericOnly =
               $('#amb-carousel').carousel({
                 interval: false
               }); 
+              */
 
