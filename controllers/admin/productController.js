@@ -4,9 +4,9 @@ let categoriesModel = require('../../models/categories');
 class ProductController  {
   get (req, res) {
     let search = req.param('search'),
-        query = search ? {'name': new RegExp(search, 'i')} : {},
-        limit = 5,
-        skip = req.param('page') || 0;
+    query = search ? {'name': new RegExp(search, 'i')} : {},
+    limit = 5,
+    skip = req.param('page') || 0;
 
     let findProducts = productsModel.find(query).limit(limit).skip(skip * limit);
 
@@ -28,9 +28,12 @@ class ProductController  {
   post(req, res) {
     let product = new productsModel(req.body);
     product.mainImage = req.files['mainImage'][0].filename;
-    product.images = req.files['images'].map(function (obj) {
-      return obj.filename;
-    }); //SANTO MAP
+
+    if(req.files['images']) {
+      product.images = req.files['images'].map(function (obj) {
+        return obj.filename;
+      }); //SANTO MAP
+    }
 
     let save = product.save();
 
@@ -70,27 +73,27 @@ class ProductController  {
   getOne (req, res) {
     productsModel.findById(req.params.id,(err, prod) => {
       if (err)
-        return res.status(500).send(err);
+      return res.status(500).send(err);
       else {
         categoriesModel.find({},function(err, cats) {
           if(err) return res.status(500).send(err);
           debugger;
           res.render('admin/pages/product/form',
-            {product : prod, categories : cats}
-          );
-        });
-      }
-    });
-  };
+          {product : prod, categories : cats}
+        );
+      });
+    }
+  });
+};
 
-  delete(req, res) {
-    productsModel.remove({ _id : req.params.id}, (err) => {
-      if (err) 
-        return res.status(500).send(err);
-      else
-        return res.send();
-    });
-  }
+delete(req, res) {
+  productsModel.remove({ _id : req.params.id}, (err) => {
+    if (err)
+    return res.status(500).send(err);
+    else
+    return res.send();
+  });
+}
 }
 
 module.exports = new ProductController();
