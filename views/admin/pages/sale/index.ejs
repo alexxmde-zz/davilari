@@ -21,8 +21,6 @@
           <tr>
             <th>Promocao</th>
             <th>Descrição</th>
-            <th>Subdescricao</th>
-            <th>Link</th>
             <th>Ativa</th>
             <th>Ações</th>
           </tr>
@@ -32,9 +30,7 @@
           <tr>
             <td> <%= s.name %> </td>
             <td> <%= s.description %> </td>
-            <td> <%= s.subdescription %> </td>
-            <td> <%= s.link %> </td>
-            <td> <%= s.active%> </td>
+            <td> <%= s.active ? 'Ativa' : 'Não'%> </td>
 
             <td>
               <a href="/admin/promocao/<%= s.IdSale %>">

@@ -24,11 +24,7 @@
 
 
         <!-- LINK -->
-        <fieldset class="form-group">
-          <label for"name">Link</label>
-          <input class="form-control" value="<%= sale.link%>" type="text" name="link" id="link" placeholder="link"/>
-          <p class="validation" id="link-validation"></p>
-        </fieldset>
+       
         <!-- ACTIVE -->
         <fieldset class="form-group">
           <label for"name">Ativa</label>
@@ -55,7 +51,7 @@
 
 
         <fieldset class="form-group">
-          <button class="form-control btn btn-success">Salvar</button>
+          <button id="submit-sale" class="form-control btn btn-primary">Salvar</button>
         </fieldset>
       </form>
       <a href="/admin/promocoes">
