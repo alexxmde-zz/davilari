@@ -87,7 +87,7 @@ jQuery.fn.ForceNumericOnly =
                 $(".productSelect select").change(function() {
                   var selected = $(this).val();
                   console.log($(this));
-                  window.location = "/produtos?categoria=" + selected;
+                  window.location = "/produtos?categoria=" + selected+"#query";
                 });
               });
 
@@ -99,7 +99,7 @@ jQuery.fn.ForceNumericOnly =
               })
 
 
-
+/*
               $('#image-carousel').carousel({
                 interval: false
               });
@@ -107,4 +107,5 @@ jQuery.fn.ForceNumericOnly =
               $('#amb-carousel').carousel({
                 interval: false
               }); 
+              */
 

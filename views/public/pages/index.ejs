@@ -12,69 +12,70 @@
 
     <div class="carousel-inner" role="listbox">
       <% var i = 0;
-                                sales.forEach(function(s) {
-      %>
-      <!-- Beginning of the promo -->
-      <div class="item <% if (i == 0) { %> active <% } %> col-xs-12 promo no-padding">
-        <div class="c-promo-image" id="c-promo-image-<%= i %>">
+      sales.forEach(function(s) {
+          %>
+          <!-- Beginning of the promo -->
+          <div class="item <% if (i == 0) { %> active <% } %> col-xs-12 promo no-padding">
+          <div class="c-promo-image" id="c-promo-image-<%= i %>">
           <style>
 #c-promo-image-<%= i %> {
 
-  background-image:url('/resources/img/sales/<%= s.image %>');
+          background-image:url('/resources/img/sales/<%= s.image %>');
 
-}
+          }
           </style>
 
           <img  id="promo-image"src=""/>
-        </div>
-        <div id="promo-title">
+          </div>
+          <div id="promo-title">
           <h1><%= s.name %></h1>
-        </div>
-        <div id="promo-description-1">
+          </div>
+          <div id="promo-description-1">
           <h2><%= s.description %></h2>
-        </div>
-
-      </div> <!-- end of item -->
-      <% i++; }); %>
-
-
-    </div>
-
-    <div class="arrows">
-      <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-        <span class="sr-only">Previous</span>
-      </a>
-      <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-        <span class="sr-only">Next</span>
-      </a>
-    </div>
-
-  </div>
-
-</div>
-
-<div class="row r-destaques">
-  <h1 class="text-center"> Produtos em Destaque </h1>
-  <div class="destaque-container">
-      <% products.forEach(function(prod) { %>
-      <a href="/produto/<%= prod.IdProduct %>">
-        <div class="product col-sm-6 col-md-4">
-          <div class="img-box text-center">
-            <img class="img-product" src="/resources/img/products/<%= prod.mainImage %>" />
           </div>
-          <div class="info-box col-xs-12">
-            <h2 class="title-product"><%= prod.name %></h2>
-            <h3 class="price-product"><%= "R$"+prod.price+",00" %></h3>
+
+          </div> <!-- end of item -->
+
+          <% i++; }); %>
+
+
           </div>
-        </div>
-      </a>
-      <% }); %>
-    </div>
-</div>
-</div>
+
+          <div class="arrows">
+          <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
+          <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+          <span class="sr-only">Previous</span>
+          </a>
+          <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
+          <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+          <span class="sr-only">Next</span>
+          </a>
+          </div>
+
+          </div>
+
+          </div>
+
+          <div class="row r-destaques">
+          <h1 class="text-center"> Produtos em Destaque </h1>
+          <div class="destaque-container">
+          <% products.forEach(function(prod) { %>
+              <a href="/produto/<%= prod.IdProduct %>">
+              <div class="product col-sm-6 col-md-4">
+              <div class="img-box text-center">
+              <img class="img-product" src="/resources/img/products/<%= prod.mainImage %>" />
+              </div>
+              <div class="info-box col-xs-12">
+              <h2 class="title-product"><%= prod.name %></h2>
+              <h3 class="price-product"><%= prod.price ? "R$"+prod.price+",00" : "" %></h3>
+              </div>
+              </div>
+              </a>
+              <% }); %>
+          </div>
+          </div>
+          </div>
 
 
 
-<% include ../templates/footer.ejs %>
+          <% include ../templates/footer.ejs %>

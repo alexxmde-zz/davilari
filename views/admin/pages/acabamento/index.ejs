@@ -21,7 +21,7 @@
             acabamentos.forEach(function(a) {
           %>
           <tr>
-            <td><%= a.nomeTipo %></td>
+            <td><%= a.tipo.nome %></td>
             <td><%= a.nome %></td>
             <td><img src="/resources/img/acabamentos/<%= a.imagem %>" class="acabamento-thumb" /></td>
             <td><a href="/admin/acabamento/<%= a.IdAcabamento %>">

@@ -11,7 +11,7 @@ $(document).ready(function () {
       if ($("#_id").val())
         isUpdate = true;
 
-      if(!data.get('IdTipoAcabamento') || data.get('IdTipoAcabamento') == 0) {
+      if(!data.get('tipo') || data.get('tipo') == 0) {
         $("#tipoAcabamento-validation").text("Campo obrigatorio!");
         isValid = false;
       }

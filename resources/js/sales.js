@@ -20,16 +20,6 @@ $(document).ready(function () {
         isValid = false;
       }
 
-      if (!data.get('subdescription')) {
-        $("#subdescription-validation").text("Campo obrigatorio!");
-        isValid = false;
-      }
-
-
-      if (!data.get('link')) {
-        $("#link-validation").text("Campo obrigatorio!");
-        isValid = false;
-      }
 
       if (!data.get('image')) {
         if(!isUpdate) {
@@ -49,13 +39,14 @@ $(document).ready(function () {
     if($('#_id').val()) {
       url = "/admin/promocao/" + $('#_id').val();
       method = "PUT";
-      loc = "/admin/promocao/" + $('#_id').val();
+      //loc = "/admin/promocao/" + $('#_id').val();
 
     }
 
 
     if (validateSale(data)) {
-
+      $('#submit-sale').prop('disabled',true);
+      $("#submit-sale").text("Salvando...");
       $.ajax({
         url: url,
         type: method,
@@ -65,10 +56,10 @@ $(document).ready(function () {
       }).success(function(){
         window.location.href = loc;
       })
-      .fail(function (data) {
-        alert(data.responseText);
-        console.log(data);
-      });
+        .fail(function (data) {
+          alert(data.responseText);
+          console.log(data);
+        });
     } else {
 
     }

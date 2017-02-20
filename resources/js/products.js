@@ -15,15 +15,6 @@ $(document).ready(function () {
         isValid = false;
       }
 
-      if (!data.get('description')) {
-        $("#description-validation").text("Campo obrigatorio!");
-        isValid = false;
-      }
-
-      if (!data.get('price')) {
-        $("#price-validation").text("Campo obrigatorio!");
-        isValid = false;
-      }
 
       if (!data.get('mainImage')) {
         if (!isUpdate) {
@@ -68,7 +59,7 @@ $(document).ready(function () {
 
 
     if (validateProduct(data)) {
-
+console.log("Sending ajax");
       $.ajax({
         url: url,
         type: method,
@@ -76,6 +67,7 @@ $(document).ready(function () {
         processData: false,
         contentType: false
       }).success(function(){
+              console.log("Success");
                window.location.href = loc;
       })
       .fail(function (xhr, type, error) {
@@ -109,6 +101,25 @@ $("#imageModal").on("show.bs.modal", function (e) {
   $('.delete-button').attr('data-image', imageTitle);
   $('.img-modal').attr('src', '/resources/img/products/' + imageTitle);
 
+
+});
+
+$('#btn-excluir').on('click', function(e) {
+  e.preventDefault();
+  var locArr = window.location.href.split('/');
+  var id = locArr[locArr.length-1];
+  var xhr = new XMLHttpRequest();
+
+  xhr.open('DELETE','/admin/produto/' + id);
+  xhr.onload = function () {
+    if (xhr.status === 200) {
+      document.location.href = '/admin/produtos';
+    } else {
+      alert(xhr.responseText);
+    }
+  }
+
+  xhr.send();
 
 });
 

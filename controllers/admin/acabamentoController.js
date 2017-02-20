@@ -1,79 +1,72 @@
-var acabamentoDAO = require('../../models/data/mysql/acabamentoDAO');
-var tipoAcabamentoDAO = require('../../models/data/mysql/tipoAcabamentoDAO');
-function AcabamentoController () {
+const acabamentoModel = require('../../models/acabamento');
+const tipoAcabamentoModel = require('../../models/tipoAcabamento');
 
-  this.renderIndex = function (req, res) {
+class AcabamentoController {
 
-    acabamentoDAO.buscarTodos(
-      function resolve(acabamentos) {
-        res.render("admin/pages/acabamento", {'acabamentos' : acabamentos});
-      },
-      function reject(err) {
-        res.send(err);
-      });
-  };
-
-  this.addAcabamento = function (req, res) {
-    var acabamento = req.body;
-    acabamento.imagem = req.files.imagem[0].filename;
-
-    acabamentoDAO.addAcabamento(acabamento, 
-      function resolve() {
-        res.status(200).send("OK");
-      },
-      function reject(err) {
+  renderIndex(req, res) {
+    acabamentoModel.find({})
+    .populate('tipo')
+    .exec((err, acabamentos) => {
+      if (err)
         res.status(500).send(err);
-      });
+      else
+        res.render('admin/pages/acabamento', {'acabamentos' : acabamentos})
+    });
   };
 
-  this.renderForm = function (req, res) {
-    tipoAcabamentoDAO.buscarTodos(
-      function resolve(tipos) {
-        res.render("admin/pages/acabamento/form", {'tipos' : tipos, 'acabamento' : {}});
-      },
-      function reject(err) {
-        res.send(err);
-      });
-  };
+  addAcabamento(req, res) {
+    let acabamento = new acabamentoModel(req.body);
 
-  this.renderAcabamento = function (req, res) {
-    tipoAcabamentoDAO.buscarTodos(
-      function resolve(tipos) {
-
-        acabamentoDAO.buscarAcabamento(req.params.id,
-          function resolve(acabamento)
-          {
-            console.log(acabamento);
-            res.render("admin/pages/acabamento/form", {'tipos' : tipos, 'acabamento' : acabamento});
-          },
-          function reject(err) {
-            res.send(err);
-          });
-      },
-
-      function reject(err) {
-        res.send(err);
-      });
-
-  };
-
-  this.updateAcabamento = function (req, res) {
-    var acabamento = req.body;
-     acabamento.IdAcabamento = req.params.id;
-
-     if (req.files.imagem) {
-       acabamento.imagem = req.files.imagem[0].filename;
-     }
+    acabamento.imagem = req.files.imagem[0].filename;
     
-
-     acabamentoDAO.updateAcabamento(acabamento, 
-       function resolve() {
-         res.status(200).send("OK");
-       },
-       function reject(err) {
-         res.status(500).send(err);
-       });
+    acabamento.save(err => {
+        if (err)
+          res.status(500).send(err);
+        else
+          res.send();
+        })
   };
+
+  renderForm(req, res) {
+    tipoAcabamentoModel.find({}, (err, tipos) => {
+      if (err)
+        res.status(500).send(err);
+      else
+        res.render('admin/pages/acabamento/form', {'tipos' : tipos, 'acabamento' : {}});
+    });
+  }
+   
+  renderAcabamento(req, res) {
+    tipoAcabamentoModel.find({}, (err, tipos) => {
+      if (err)
+       return res.status(500).send(err);
+      else {
+        acabamentoModel.findById(req.params.id, (err, acabamento) => {
+          if (err)
+            return res.status(500).send(err)
+          else
+            res.render('admin/pages/acabamento/form', {'tipos' :tipos, 'acabamento' :acabamento});
+        })
+      }
+    })
+  }
+
+  updateAcabamento(req, res) {
+    //Parse request.
+    let acabamento = req.body,
+        id = req.params.id;
+
+    //Append Image.
+    if (req.files.imagem) {
+      acabamento.imagem = req.files.imagem[0].filename;
+    }
+    //Update and send response.
+    acabamentoModel.findByIdAndUpdate(id, acabamento,
+      err => {
+        if (err) res.status(500).send(err);
+        else res.send();
+      })
+  }
 
 }
 

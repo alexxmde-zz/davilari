@@ -1,5 +1,5 @@
 var utils = require('../../utils');
-var productDAO = require('../../models/data/mysql/productDAO');
+let productsModel = require('../../models/products');
 
 var buildHtml = function (data) {
   var cart = data.cart;
@@ -131,19 +131,12 @@ function CartController () {
 
 
   this.getCart = function (req, res) {
-    productDAO.buscarDestaques(function (err, destaques) {
-      if (err) {
-        res.send(err);
-      } else {
-
-        res.render('public/pages/cart', {'cart' : req.session.cart, 'products' : destaques });
-      }
-
-    });
-
-  };
-
-
+    productsModel.find({'destaque' : true})
+      .then(destaques => res.render('public/pages/cart', {'cart' : req.session.cart, 'products': destaques}))
+      .catch(e => res.status(500).render(err));
+  }
 };
+
+
 
 module.exports = new CartController();

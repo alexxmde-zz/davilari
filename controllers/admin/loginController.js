@@ -1,4 +1,4 @@
-var userDAO = require('../../models/data/mysql/userDAO');
+let usersModel = require('../../models/users');
 var productController = require("./productController");
 function loginController () {
 
@@ -25,21 +25,18 @@ function loginController () {
   };
 
   this.post = function (req, res) {
-    var user = req.body;
-    userDAO.FindByNameAndPassword(user.username, user.password, function(err, user) {
-      if (err) 
-      return res.status(500).send(err);
-      
-      if(user) {
-        req.session.isLogged = true;  
-        return res.status(200).send("OK");
-      } else {
-        return res.status(400).send("Usuário não encontrado");
-      }
-      
-      VerifyUser(user, req, res);
-      
-    });
+    let findUsers = usersModel.find(req.body).exec();
+
+    findUsers.then(user => {
+        if(user) {
+        req.session.isLogged = true;
+        res.send();
+        } else 
+        res.status(404).send('Usuário não encontrado');
+        })
+
+    findUsers.catch(e => res.status(500).send(err));
+
   };
 
 
@@ -54,9 +51,9 @@ function loginController () {
      };
      */
 
-  this.logout = function (req, res) {
-    req.session.isLogged = false;
-  };
+this.logout = function (req, res) {
+  req.session.isLogged = false;
+};
 }
 
 

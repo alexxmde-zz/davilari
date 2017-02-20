@@ -1,85 +1,73 @@
-var ambienceDAO = require('../../models/data/mysql/ambienceDAO.js');
+let ambiencesModel = require('../../models/ambiences');
 
-function AmbienceController() {
-  this.renderIndex = function (req, res) {
-    ambienceDAO.getAllAmbiences(
-      function resolve (ambiences) {
-        res.render('admin/pages/ambience/', { 'ambiences' : ambiences });
-      }, 
-      function reject(error) {
-        res.send(error);
-      });
+class AmbienceController {
 
-  };
+  renderIndex(req, res) {
+    let findAmbs =   ambiencesModel.find({}).exec();
+    findAmbs.then((ambs) => {
+      res.render('admin/pages/ambience', {'ambiences' : ambs});
+    });
 
-  this.renderAmbience = function (req, res) {
-    ambienceDAO.getAmbience( req.params.id, 
-      function resolve (ambience) {
-        res.render('admin/pages/ambience/form', {'ambience' : ambience} );
-      },
-      function reject (error) {
-        res.json(error);
-      });
-  };
+    findAmbs.catch(err=> {
+      res.status(500).send(err);
+    })
+  }
 
-  this.renderForm = function (req, res) {
+  renderAmbience(req, res) {
+    let findAmb = ambiencesModel.findById(req.params.id).exec();
+    findAmb.then(amb => {
+      res.render('admin/pages/ambience/form', {'ambience' : amb});
+    });
+
+    findAmb.catch(err => res.status(500).send(err));
+  }
+
+  renderForm (req, res) {
     res.render('admin/pages/ambience/form', {'ambience' : {} });
-  };
+  }
 
-  this.postAmbience = function (req, res) {
-    var ambience = req.body;
+  postAmbience (req, res) {
+    let ambience = new ambiencesModel(req.body);
 
     ambience.mainImage = req.files['mainImage'][0].filename;
     ambience.images = [];
-    req.files['images']
+    if (req.files['images']) {
+      req.files['images']
       .forEach(function ReturnImage (img) {
         ambience.images.push(img.filename);
-    });
+      });
+    }
+    let save = ambience.save();
+    save.then(() => res.send())
+    save.catch(err => res.status(500).send(err));
 
-    ambienceDAO.addAmbience(ambience,
-      function Resolve () {
-        res.status(200).send("OK");
-      },
-      function Reject (error) {
-        res.status(500).send(error);
-      }
-    );
+  }
 
-
-   
-  };
-
-  this.updateAmbience = function (req, res) {
-    var ambience = req.body;
-        ambience.images = [];
+  updateAmbience (req, res) {
+    let ambience = req.body;
+    ambience.images = [];
 
     if (req.files['images']) {
 
       ambience.images = req.files['images'].map(function (obj) {
         return obj.filename;
       });
-
     }
 
     if (req.files['mainImage']) {
       ambience.mainImage = req.files['mainImage'][0].filename;
     }
 
-    ambience.old_images = JSON.parse(ambience.old_images);
-    ambience.images = ambience.images.concat(ambience.old_images);
+    if(ambience.old_images) {
+      ambience.old_images = JSON.parse(ambience.old_images);
+      ambience.images = ambience.images.concat(ambience.old_images);
+    }
 
-    ambience.IdAmbience = req.params.id;
+    let update = ambiencesModel.findByIdAndUpdate(req.params.id, ambience);
+    update.then(() => res.send());
+    update.catch(err => res.status(500).send(err));
 
-
-    ambienceDAO.updateAmbience(ambience, function (err) {
-
-      res.status(200).send("OK");
-
-    }, function(err) {
-      return res.status(500).send(err);
-    });
-
-  };
+  }
 }
 
 module.exports = new AmbienceController();

@@ -1,106 +1,38 @@
-var productDAO = require('../../models/data/mysql/productDAO');
+let productsModel = require('../../models/products');
+let categoriesModel = require('../../models/categories');
+class ProductController  {
 
-categoryDAO= require('../../models/data/mysql/categoryDAO');
-function ProductController () {
+  get(req, res) {
+    let query = req.param('categoria')
+      ? {'name' : req.param('categoria') } 
+    : {},
+    limit = 0,
+    skip = req.param('skip') || 0;
 
+      categoriesModel.findOne(query).then(c => {
 
-  this.get = function (req, res) {
-    var categoryToFind = req.param('categoria');
-    var isAmbiente = false;
+      let categories = categoriesModel.find({}).exec(),
+      products = productsModel.find({category : c._id}).limit(limit).skip(skip*10).populate({path:'category', match: query}).where(),
+      results = Promise.all([categories, products]);
 
-    console.log("\n\nFinding all categories");
-    categoryDAO.findAll(function(err, cats) {
+    results.then(arr => {
+        let categories = arr[0],
+        products = arr[1],
+        queryCategory = req.param('categoria'),
+        pCount = products.length,
+        ambiente = false;
+        
 
-      if (categoryToFind) {
-        console.log("Querying category with " +categoryToFind);
-        categoryDAO.findByName(categoryToFind, function(err, cat) {
-          if (cat) {
-            console.log("Found category " + cat.IdCategory);
-            console.log("Querying for products with the IdCategory " + cat.IdCategory);
-
-            productDAO.findProductByIdCategory(cat.IdCategory).then(
-              function resolve (prods) {
-                console.log("Showing " +  prods.length + " products");
-
-            res.render('public/pages/products', {'ambiente' : isAmbiente, products : prods, categories : cats, queryCategory: categoryToFind});
-
-          },
-          function reject(err){
-            res.render('public/pages/error', {error: err});
-          });
-          } else {
-            console.log("Category " + categoryToFind + "not found");
-            console.log("Querying for all products");
-            productDAO.findAllProducts(function(err, prods) {
-              console.log("Found " + prods.length + "products");
-              res.render('public/pages/products', {'ambiente' : isAmbiente, products : prods, categories : cats, queryCategory: categoryToFind});
-            });
-
-          }
+        res.render('public/pages/products', {ambiente, products, categories, queryCategory, pCount})
         });
-
-      } else {
-        console.log("Querying for all products");
-        productDAO.findAllProducts(function(err, prods) {
-          res.render('public/pages/products', {'ambiente' : isAmbiente, products : prods, categories : cats, queryCategory: categoryToFind});
-        });
-      }
-    });
-  };
-
-  this.getAmbientes = function (req, res) {
-    var categoryToFind = req.param('categoria');
-    isAmbiente = true;
-
-    console.log("\n\nQuerying for all categories");
-    console.log("\n\nQuerying for all categories");
-    categoryDAO.findAll(function(err, cats) {
-      if (categoryToFind) {
-        console.log("Querying for category " + categoryToFind);
-        categoryDAO.findByName(categoryToFind, function (err, cat) {
-          if (err) return res.status(500).render(err);
-          if (cat) {
-            console.log("Found category " + categoryToFind);
-            console.log("Querying for ambients with the IdCategory = " + cat.IdCategory);
-
-          productDAO.findAmbientesByCategory(cat.IdCategory)
-            .then(function resolve (ambientes) {
-              console.log("Found " + ambientes.length + " products");
-              return res.render('public/pages/products',
-                {'ambiente': isAmbiente, 'products' : ambientes, 'categories' : cats, 'queryCategory': categoryToFind});
-
-            },
-            function reject (err) {
-              return res.status(500).render(err);
-            });
-          }
-
-               });
-
-      } else {
-        console.log("Querying for all ambients");
-        productDAO.findAmbientes().then(
-          function resolve(products) {
-
-            console.log(products);
-            console.log("Rendering");
-            return res.render('public/pages/products',
-              {'ambiente' : isAmbiente, products : products, categories : cats, queryCategory: categoryToFind});
-          },
-          function reject(err) {
-            res.render('public/pages/error', {error: err});
-          });
-      }
-    });
-
-  };
-
-  this.getProduct = function (req, res) {
-    productDAO.findOne(req.params.id, function (err, prod) {
-    return res.render('public/pages/products/product', {'product' : prod});
-    });
-
-  };
+        })
+     }
+ 
+  getProduct(req, res) {
+    let findProd = productsModel.findById(req.params.id).exec();
+    findProd.then(prod => res.render('public/pages/products/product', {'product':prod}));
+    findProd.catch(err => res.status(500).send(err));
+  }
 }
 
 module.exports = new ProductController();

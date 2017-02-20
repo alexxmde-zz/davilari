@@ -9,13 +9,13 @@
 
         <fieldset class="form-group">
           <label for="tipo">Tipo de Acabamento</label>
-          <select class="form-control" name="IdTipoAcabamento">
+          <select class="form-control" name="tipo">
 
             <option value="0">-- Selecione o tipo do Acabamento --</option>
             <% if (tipos) {
                   tipos.forEach(function(t) { %>
                   <option
-                  <% if (t.IdTipoAcabamento == acabamento.IdTipoAcabamento) { %>
+                  <% if (t.IdTipoAcabamento == acabamento.tipo) { %>
                   selected
                   <% } %>
                   value="<%= t.IdTipoAcabamento %>">
