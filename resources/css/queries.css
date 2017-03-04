@@ -1,5 +1,8 @@
 
 @media only screen and (min-width : 280px) {
+  body {
+    font-family: 'Roboto Condensed', sans-serif;
+  }
   .img-acabamento {
     width:200px;
     height:200px;
@@ -313,7 +316,6 @@
     color:white !important;
     text-transform:uppercase;
     text-decoration:underline;
-    font-family:Sans;
   }
 
 
