@@ -3,4 +3,6 @@ models/data/mysql/credentials.json
 utils/email.json
 client/
 resources/img/products
+resources/img/ambiences
+resources/img/sales
 *.swp
